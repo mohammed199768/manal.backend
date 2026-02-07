@@ -1,0 +1,146 @@
+[
+  {
+    "id": "d4487368-de18-4798-aed8-ba3af7200824",
+    "courseId": "2cdfe5be-f67c-44a7-82c7-847faf24917a",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "fc34f902-df2b-47f1-a3e8-7b9420bef52b",
+    "courseId": "2cdfe5be-f67c-44a7-82c7-847faf24917a",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "f17b8244-db60-45da-b5d2-c195fd1a9080",
+    "courseId": "2cdfe5be-f67c-44a7-82c7-847faf24917a",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "a3e3dbd9-0e06-4181-b86e-85daee95ea9c",
+    "courseId": "7eeaaf72-dcf4-40e7-a864-d2dcf0bea36a",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "424fcb37-2648-4efe-8c50-9ff79d140a88",
+    "courseId": "7eeaaf72-dcf4-40e7-a864-d2dcf0bea36a",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "a80b98ec-1a4a-4dc6-a21a-5ed63c70d976",
+    "courseId": "7eeaaf72-dcf4-40e7-a864-d2dcf0bea36a",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "eac1d532-e384-4874-b269-5abd8bac9a69",
+    "courseId": "425aa983-79d3-4867-87a6-a8f2327e5576",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "73c63ed5-b72e-45e5-a074-908ab42665ac",
+    "courseId": "425aa983-79d3-4867-87a6-a8f2327e5576",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "67291925-a79f-495e-bc2e-4a6adc263e80",
+    "courseId": "425aa983-79d3-4867-87a6-a8f2327e5576",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "4411f596-f4dc-4216-b3b5-7a7f34c85354",
+    "courseId": "a0bd60c9-f8b6-4041-957d-8ae63f08e860",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "fb1ede67-5eba-4a02-9a9c-e8b75a6f1bc8",
+    "courseId": "a0bd60c9-f8b6-4041-957d-8ae63f08e860",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "e0a13d4b-5b6f-46a0-afb4-6552c70ccec9",
+    "courseId": "a0bd60c9-f8b6-4041-957d-8ae63f08e860",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "8ef9bb69-5aee-4ed4-853d-711652d55f73",
+    "courseId": "95377a88-4c20-4d2c-9339-96d45a0b4d3d",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "dbe92631-38d5-448a-b8cd-9220c923505e",
+    "courseId": "95377a88-4c20-4d2c-9339-96d45a0b4d3d",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "80485f4c-bd9c-4d3d-91fa-ded4d0f9e2d4",
+    "courseId": "95377a88-4c20-4d2c-9339-96d45a0b4d3d",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "91655f47-81d0-42e0-95b9-09438565af1d",
+    "courseId": "59199b55-0866-4499-acc3-835ab84b3b87",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "ad198a7b-aa31-4093-ab62-36e0d39df661",
+    "courseId": "59199b55-0866-4499-acc3-835ab84b3b87",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "95026141-21a4-4033-b3a6-5e4275a1611c",
+    "courseId": "59199b55-0866-4499-acc3-835ab84b3b87",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "373ba1ff-0893-4844-b4ed-5b74f77662b9",
+    "courseId": "d1ca4b78-57ec-455a-ae40-9a597796031e",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "55d28f81-3d7a-4b4f-9e29-b794d0bee7cb",
+    "courseId": "d1ca4b78-57ec-455a-ae40-9a597796031e",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "4bdbc187-00c5-4481-aa61-ae43e56ffb6c",
+    "courseId": "d1ca4b78-57ec-455a-ae40-9a597796031e",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  },
+  {
+    "id": "a50215ff-12b9-4f5b-8f71-b5992516ea5b",
+    "courseId": "91690976-8b9d-4a64-bb3f-4234c7ce1eb9",
+    "title": "Section 1: Foundations",
+    "order": 1
+  },
+  {
+    "id": "7ad457ad-c317-410d-a3dc-dcd91b1bcd17",
+    "courseId": "91690976-8b9d-4a64-bb3f-4234c7ce1eb9",
+    "title": "Section 2: Deep Dive",
+    "order": 2
+  },
+  {
+    "id": "4d86cd47-d15c-428e-a63a-c2c164f9d001",
+    "courseId": "91690976-8b9d-4a64-bb3f-4234c7ce1eb9",
+    "title": "Section 3: Practical Applications",
+    "order": 3
+  }
+]

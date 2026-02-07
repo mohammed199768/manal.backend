@@ -1,0 +1,182 @@
+[
+  {
+    "id": "45f75d13-bc8b-46cc-b670-cf924b61eab2",
+    "userId": "445d02d7-8cea-4f83-9ddf-4f544645ad27",
+    "lessonId": "0aaee7f7-002e-4e40-98f2-1cb27528a4d0",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.468Z",
+    "updatedAt": "2026-01-28T16:06:35.470Z"
+  },
+  {
+    "id": "426556e7-3526-4597-a6c2-a40bd4e9eba7",
+    "userId": "445d02d7-8cea-4f83-9ddf-4f544645ad27",
+    "lessonId": "cb89649a-fe78-42c6-938a-9d2a0f00e5a9",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.472Z",
+    "updatedAt": "2026-01-28T16:06:35.473Z"
+  },
+  {
+    "id": "818e06fa-ef7e-45b7-b798-41bbf122c3d9",
+    "userId": "4a5ec059-713c-4d7d-b040-7c8aba4c7c22",
+    "lessonId": "8c83209d-61dd-4ffa-ba5f-e44e4810dee5",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.478Z",
+    "updatedAt": "2026-01-28T16:06:35.479Z"
+  },
+  {
+    "id": "b3376cbf-80d7-4ceb-81ed-7279114d52f3",
+    "userId": "4a5ec059-713c-4d7d-b040-7c8aba4c7c22",
+    "lessonId": "ec9e57a9-8ee4-49e4-aab5-c9d0a43bd11e",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.480Z",
+    "updatedAt": "2026-01-28T16:06:35.481Z"
+  },
+  {
+    "id": "34f11b53-a2f3-4920-ab9e-c438df53ddc3",
+    "userId": "1cbffd82-10a6-4c6c-bc71-45788e860fa8",
+    "lessonId": "445abcf5-0d4e-4daa-863b-9ffea8c914cb",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.487Z",
+    "updatedAt": "2026-01-28T16:06:35.488Z"
+  },
+  {
+    "id": "3164740e-2a73-49e8-840c-7f5dafae3bc3",
+    "userId": "1cbffd82-10a6-4c6c-bc71-45788e860fa8",
+    "lessonId": "d4cbac80-0bf3-480a-9388-566a927ccf02",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.488Z",
+    "updatedAt": "2026-01-28T16:06:35.489Z"
+  },
+  {
+    "id": "9d2f1563-6ee5-4b18-8290-fa971b157925",
+    "userId": "71cff6de-36b2-451c-a854-b68514a4b079",
+    "lessonId": "0aaee7f7-002e-4e40-98f2-1cb27528a4d0",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.495Z",
+    "updatedAt": "2026-01-28T16:06:35.496Z"
+  },
+  {
+    "id": "aeef44f0-debb-49bc-8946-ce68b9a49829",
+    "userId": "71cff6de-36b2-451c-a854-b68514a4b079",
+    "lessonId": "cb89649a-fe78-42c6-938a-9d2a0f00e5a9",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.497Z",
+    "updatedAt": "2026-01-28T16:06:35.498Z"
+  },
+  {
+    "id": "47634f13-45bc-4df1-8326-5ecc9fc5c208",
+    "userId": "cae00405-2cf7-443e-b456-d24fb4a6cc0c",
+    "lessonId": "0aaee7f7-002e-4e40-98f2-1cb27528a4d0",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.503Z",
+    "updatedAt": "2026-01-28T16:06:35.504Z"
+  },
+  {
+    "id": "a88d1d3f-5756-4a5c-a210-a7284d6909ab",
+    "userId": "cae00405-2cf7-443e-b456-d24fb4a6cc0c",
+    "lessonId": "cb89649a-fe78-42c6-938a-9d2a0f00e5a9",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.505Z",
+    "updatedAt": "2026-01-28T16:06:35.506Z"
+  },
+  {
+    "id": "b1bff583-dde9-429c-9fc3-deb7fb877e60",
+    "userId": "a8f46819-4c8f-4089-b5c4-157805064a68",
+    "lessonId": "445abcf5-0d4e-4daa-863b-9ffea8c914cb",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.512Z",
+    "updatedAt": "2026-01-28T16:06:35.513Z"
+  },
+  {
+    "id": "81820487-e124-46b4-ae5b-1158efc7570a",
+    "userId": "a8f46819-4c8f-4089-b5c4-157805064a68",
+    "lessonId": "d4cbac80-0bf3-480a-9388-566a927ccf02",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.514Z",
+    "updatedAt": "2026-01-28T16:06:35.515Z"
+  },
+  {
+    "id": "668f830d-a3d2-477f-9d21-b5d6caafce41",
+    "userId": "3c85628b-6f30-4351-9fed-ee60a4d8e996",
+    "lessonId": "d1e9772f-1935-43d1-9867-5ef833c39263",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.521Z",
+    "updatedAt": "2026-01-28T16:06:35.522Z"
+  },
+  {
+    "id": "c159141d-7c09-478e-8051-1a5187c129e2",
+    "userId": "3c85628b-6f30-4351-9fed-ee60a4d8e996",
+    "lessonId": "d8e760e4-33ea-40a9-b0cd-903ea883b75c",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.522Z",
+    "updatedAt": "2026-01-28T16:06:35.523Z"
+  },
+  {
+    "id": "adc4d010-6ae5-4f69-94ef-e8ee9f8a1428",
+    "userId": "a33d75ed-55c9-412d-8366-8c3a585d488b",
+    "lessonId": "8c83209d-61dd-4ffa-ba5f-e44e4810dee5",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.529Z",
+    "updatedAt": "2026-01-28T16:06:35.530Z"
+  },
+  {
+    "id": "916f76c1-3f5d-4203-a32d-b12be4b628f2",
+    "userId": "a33d75ed-55c9-412d-8366-8c3a585d488b",
+    "lessonId": "ec9e57a9-8ee4-49e4-aab5-c9d0a43bd11e",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.531Z",
+    "updatedAt": "2026-01-28T16:06:35.532Z"
+  },
+  {
+    "id": "72c4b4d6-719f-4a63-a70a-032cdcbf8c3b",
+    "userId": "16561add-08d0-4f89-9217-e0c26a47f90d",
+    "lessonId": "0aaee7f7-002e-4e40-98f2-1cb27528a4d0",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.538Z",
+    "updatedAt": "2026-01-28T16:06:35.539Z"
+  },
+  {
+    "id": "85e85839-1026-499c-aaa3-43999276fd18",
+    "userId": "16561add-08d0-4f89-9217-e0c26a47f90d",
+    "lessonId": "cb89649a-fe78-42c6-938a-9d2a0f00e5a9",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.539Z",
+    "updatedAt": "2026-01-28T16:06:35.540Z"
+  },
+  {
+    "id": "a775607e-f4b8-4145-90e1-0811d90051b4",
+    "userId": "f4e72740-9774-4cd7-af18-f0fb1cbd2fbf",
+    "lessonId": "179980a9-8966-405c-b7e3-9c5f40135e45",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.547Z",
+    "updatedAt": "2026-01-28T16:06:35.548Z"
+  },
+  {
+    "id": "8074d6f2-9a86-488c-803b-f0c317d30fa2",
+    "userId": "f4e72740-9774-4cd7-af18-f0fb1cbd2fbf",
+    "lessonId": "c4302c49-a23e-4857-9487-95b374019733",
+    "lastPositionSeconds": 300,
+    "isVideoCompleted": true,
+    "completedAt": "2026-01-28T16:06:35.548Z",
+    "updatedAt": "2026-01-28T16:06:35.549Z"
+  }
+]

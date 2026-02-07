@@ -1,0 +1,334 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+}
+
+enum AccountProvider {
+  GOOGLE
+  APPLE
+}
+
+enum EnrollmentStatus {
+  PENDING
+  ACTIVE
+  CANCELED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  MANUAL_WHATSAPP
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum FileRenderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  password     String? // Nullable for OAuth users
+  username     String   @unique
+  role         Role     @default(STUDENT)
+  firstName    String?
+  lastName     String?
+  avatar       String?
+  bio          String?
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  accounts          Account[]
+  instructorCourses Course[]         @relation("InstructorCourses")
+  enrollments       Enrollment[]
+  courseProgress    CourseProgress[]
+
+  partProgress PartProgress[]
+
+  paymentRecords PaymentRecord[]
+
+  // New Registration & Verification Fields
+  phoneNumber     String?
+  emailVerifiedAt DateTime?
+
+  verificationCodes   VerificationCode[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@map("users")
+}
+
+model VerificationCode {
+  id        String   @id @default(uuid())
+  codeHash  String
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("verification_codes")
+}
+
+model Account {
+  id                String          @id @default(uuid())
+  userId            String
+  provider          AccountProvider
+  providerAccountId String
+  createdAt         DateTime        @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model University {
+  id        String   @id @default(uuid())
+  name      String
+  logo      String?
+  createdAt DateTime @default(now())
+
+  courses Course[]
+
+  @@map("universities")
+}
+
+model Course {
+  id           String  @id @default(uuid())
+  title        String
+  slug         String  @unique
+  description  String?
+  price        Decimal @db.Decimal(10, 2)
+  thumbnail    String?
+  instructorId String
+  universityId String // Required: V2 Simplification - Direct University → Course
+
+  isPublished Boolean @default(false)
+  isFeatured  Boolean @default(false)
+  isFree      Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  instructor User       @relation("InstructorCourses", fields: [instructorId], references: [id], onDelete: Restrict)
+  university University @relation(fields: [universityId], references: [id], onDelete: Restrict)
+
+  enrollments    Enrollment[]
+  courseProgress CourseProgress[]
+
+  paymentRecords PaymentRecord[]
+
+  lectures Lecture[]
+
+  @@index([instructorId])
+  @@index([universityId])
+  @@index([isPublished, isFeatured])
+  @@map("courses")
+}
+
+model Enrollment {
+  id          String           @id @default(uuid())
+  userId      String
+  courseId    String
+  status      EnrollmentStatus @default(PENDING)
+  enrolledAt  DateTime         @default(now())
+  activatedAt DateTime?
+  refundedAt  DateTime?
+  canceledAt  DateTime?
+  updatedAt   DateTime         @updatedAt
+
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
+  course         Course               @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  paymentRecords PaymentRecord[]
+  locks          EnrollmentPartLock[]
+
+  @@unique([userId, courseId])
+  @@index([userId, status])
+  @@index([courseId, status])
+  @@map("enrollments")
+}
+
+model PaymentRecord {
+  id                    String          @id @default(uuid())
+  enrollmentId          String
+  userId                String
+  courseId              String
+  provider              PaymentProvider
+  providerTransactionId String?
+  providerEventId       String          @unique // For webhook idempotency
+  amount                Decimal         @db.Decimal(10, 2)
+  currency              String          @default("USD")
+  status                PaymentStatus   @default(PENDING)
+  rawPayload            Json?
+  createdAt             DateTime        @default(now())
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Restrict)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Restrict)
+  course     Course     @relation(fields: [courseId], references: [id], onDelete: Restrict)
+
+  @@map("payment_records")
+}
+
+model CourseProgress {
+  id       String @id @default(uuid())
+  userId   String
+  courseId String
+
+  lastPartId String? // New Tree Pointer
+  updatedAt  DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@map("course_progress")
+}
+
+model SiteSettings {
+  id             String   @id @default(uuid())
+  key            String   @unique @default("default")
+  aboutContent   String?
+  contactEmail   String?
+  whatsappNumber String?
+  facebookUrl    String?
+  twitterUrl     String?
+  updatedAt      DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// V2 Content Tree (Contract #7) - DO NOT MODIFY
+
+model Lecture {
+  id       String @id @default(uuid())
+  courseId String
+  title    String
+  order    Int
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  parts  Part[]
+
+  @@unique([courseId, order])
+  @@index([courseId])
+  @@map("lectures")
+}
+
+model Part {
+  id        String @id @default(uuid())
+  lectureId String
+  title     String
+  order     Int
+
+  lecture        Lecture              @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  lessons        PartLesson[]
+  files          PartFile[]
+  partProgresses PartProgress[]
+  locks          EnrollmentPartLock[]
+
+  @@unique([lectureId, order])
+  @@index([lectureId])
+  @@map("parts")
+}
+
+model PartLesson {
+  id     String @id @default(uuid())
+  partId String
+  title  String
+  video  String // Bunny Video ID
+  order  Int
+
+  part Part @relation(fields: [partId], references: [id], onDelete: Cascade)
+
+  @@unique([partId, order])
+  @@index([partId])
+  @@map("part_lessons")
+}
+
+enum PartFileType {
+  PDF
+  PPTX
+}
+
+model PartFile {
+  id           String           @id @default(uuid())
+  partId       String
+  title        String
+  displayName  String           @default("") // Phase 10-IMPROVEMENT
+  type         PartFileType     @default(PDF)
+  storageKey   String // Stores prefix path for rendered pages (e.g., /rendered/{id}/)
+  order        Int
+  pageCount    Int              @default(0)
+  isSecure     Boolean          @default(true)
+  renderStatus FileRenderStatus @default(PENDING)
+
+  part Part @relation(fields: [partId], references: [id], onDelete: Cascade)
+
+  @@index([partId])
+  @@map("part_files")
+}
+
+model PartProgress {
+  id                  String    @id @default(uuid())
+  userId              String
+  partId              String
+  lastPositionSeconds Int       @default(0)
+  isVideoCompleted    Boolean   @default(false)
+  completedAt         DateTime?
+  updatedAt           DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  part Part @relation(fields: [partId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, partId])
+  @@map("part_progress")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  tokenHash String    @unique
+  userId    String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model EnrollmentPartLock {
+  id           String   @id @default(uuid())
+  enrollmentId String
+  partId       String
+  isLocked     Boolean  @default(true)
+  reason       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  part       Part       @relation(fields: [partId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, partId])
+  @@index([enrollmentId])
+  @@index([partId])
+  @@map("enrollment_part_locks")
+}

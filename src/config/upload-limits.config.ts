@@ -1,0 +1,10 @@
+// POLICY: Centralized upload and body size limits
+// These values are configurable policy settings, not architectural constraints
+// They can be adjusted via environment variables or this config file
+
+export const UPLOAD_LIMITS = {
+    IMAGE: 5 * 1024 * 1024,        // POLICY: 5MB for thumbnails, avatars, generic uploads
+    LOGO: 2 * 1024 * 1024,         // POLICY: 2MB for university logos
+    PDF: 25 * 1024 * 1024,         // POLICY: 25MB for lesson PDFs (PPTX falls under same category)
+    MAX_BODY_SIZE: '30mb'          // POLICY: 30MB max for JSON/urlencoded body (prevents DoS via large payloads)
+} as const;

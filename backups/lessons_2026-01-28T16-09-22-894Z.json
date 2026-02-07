@@ -1,0 +1,2530 @@
+[
+  {
+    "id": "9594a548-7fdb-45b3-8e4c-512a0418f720",
+    "sectionId": "d4487368-de18-4798-aed8-ba3af7200824",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "cf9d4239-a75c-4515-88c4-034b63cc9ff8",
+        "lessonId": "9594a548-7fdb-45b3-8e4c-512a0418f720",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "17dd51b2-a832-4ea0-aec0-bc445c5b4895",
+    "sectionId": "d4487368-de18-4798-aed8-ba3af7200824",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "0302f8a4-4a3b-4b3d-80af-42ddd729d101",
+        "lessonId": "17dd51b2-a832-4ea0-aec0-bc445c5b4895",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "fa4c905c-d828-4902-a0e6-e56df8a6741c",
+        "lessonId": "17dd51b2-a832-4ea0-aec0-bc445c5b4895",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "0b61c261-5e66-46c5-a141-647f3c2eacaf",
+    "sectionId": "d4487368-de18-4798-aed8-ba3af7200824",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "d92fb8ae-67b7-4718-b9fb-e075444b4113",
+        "lessonId": "0b61c261-5e66-46c5-a141-647f3c2eacaf",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "cfdd5dad-7bb8-4535-9b26-c4c541f093d1",
+    "sectionId": "d4487368-de18-4798-aed8-ba3af7200824",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "b3f8b120-7668-47dc-8ca5-aaa2583941f7",
+        "lessonId": "cfdd5dad-7bb8-4535-9b26-c4c541f093d1",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "e673372d-1d5a-462d-8055-0a65399aca72",
+        "lessonId": "cfdd5dad-7bb8-4535-9b26-c4c541f093d1",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "ec9e57a9-8ee4-49e4-aab5-c9d0a43bd11e",
+    "sectionId": "fc34f902-df2b-47f1-a3e8-7b9420bef52b",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "1fb13376-ce9b-46b0-aced-9b2222f03524",
+        "lessonId": "ec9e57a9-8ee4-49e4-aab5-c9d0a43bd11e",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "4d070920-156f-485d-9466-bdeba600481b",
+    "sectionId": "fc34f902-df2b-47f1-a3e8-7b9420bef52b",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "ac8b074a-7cc4-42a1-ba7e-20b31b887baf",
+        "lessonId": "4d070920-156f-485d-9466-bdeba600481b",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "1150d611-d86c-4db5-bb66-a4a7ae787fa0",
+        "lessonId": "4d070920-156f-485d-9466-bdeba600481b",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "16396e0c-3861-47e0-869a-adccabdbf9e9",
+    "sectionId": "fc34f902-df2b-47f1-a3e8-7b9420bef52b",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "6276928d-d7f5-43d0-8c5a-1896e378feff",
+        "lessonId": "16396e0c-3861-47e0-869a-adccabdbf9e9",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "38591a3a-d9aa-4c58-a5b4-5ab7b2fcf10b",
+    "sectionId": "fc34f902-df2b-47f1-a3e8-7b9420bef52b",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "636991ed-3c18-4d87-8f76-3ce31dcbae50",
+        "lessonId": "38591a3a-d9aa-4c58-a5b4-5ab7b2fcf10b",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "62d0bb22-ebe3-44aa-9fca-945988f2761e",
+        "lessonId": "38591a3a-d9aa-4c58-a5b4-5ab7b2fcf10b",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "961d4d1f-2f2a-4224-80af-2b4e08904ec9",
+        "lessonId": "38591a3a-d9aa-4c58-a5b4-5ab7b2fcf10b",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "967e02b8-96fe-4909-a558-aaa612fcafe8"
+      }
+    ]
+  },
+  {
+    "id": "8c83209d-61dd-4ffa-ba5f-e44e4810dee5",
+    "sectionId": "f17b8244-db60-45da-b5d2-c195fd1a9080",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "4db3c3f9-3c56-46ab-9aaa-134f87b8a4c1",
+        "lessonId": "8c83209d-61dd-4ffa-ba5f-e44e4810dee5",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "1fbfcbb8-9608-4702-b739-8144cef85dcc",
+    "sectionId": "f17b8244-db60-45da-b5d2-c195fd1a9080",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "26c8e893-df00-4c98-b819-9b0b08d40f00",
+        "lessonId": "1fbfcbb8-9608-4702-b739-8144cef85dcc",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "7c9e40af-4064-4837-9cab-15d53e0506a0",
+        "lessonId": "1fbfcbb8-9608-4702-b739-8144cef85dcc",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "ce9672a5-2e4c-4480-a775-8ccedfdf799f",
+    "sectionId": "f17b8244-db60-45da-b5d2-c195fd1a9080",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "1969cd6f-7720-4d69-b8a0-8ff4c2f2602e",
+        "lessonId": "ce9672a5-2e4c-4480-a775-8ccedfdf799f",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "07466523-5171-493d-b6ed-98ac4d320ceb",
+    "sectionId": "f17b8244-db60-45da-b5d2-c195fd1a9080",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "ea0fb039-3f87-4f52-aa7d-8971778fd8bc",
+        "lessonId": "07466523-5171-493d-b6ed-98ac4d320ceb",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "ccc61975-7727-4d1f-959a-1e215da7a9d7",
+        "lessonId": "07466523-5171-493d-b6ed-98ac4d320ceb",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "08215575-e014-4f42-a794-fb5a43f9d818",
+        "lessonId": "07466523-5171-493d-b6ed-98ac4d320ceb",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "0e125448-debe-4799-b52a-303e1d6b72e9"
+      }
+    ]
+  },
+  {
+    "id": "8a524e79-b019-40ae-a1af-06f8934c69f5",
+    "sectionId": "a3e3dbd9-0e06-4181-b86e-85daee95ea9c",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "e81bed29-596f-4066-afc5-37f041feb601",
+        "lessonId": "8a524e79-b019-40ae-a1af-06f8934c69f5",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "699b3ee5-6958-4d6d-b46c-d514079ebf50",
+    "sectionId": "a3e3dbd9-0e06-4181-b86e-85daee95ea9c",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "10f0ba17-7b73-465a-9069-57c74cc1aa75",
+        "lessonId": "699b3ee5-6958-4d6d-b46c-d514079ebf50",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "d9a840cb-82c4-4f48-894e-d4b5b1e2689a",
+        "lessonId": "699b3ee5-6958-4d6d-b46c-d514079ebf50",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "573590a5-e3c6-4ca9-baab-a6895e6b3b8c",
+    "sectionId": "a3e3dbd9-0e06-4181-b86e-85daee95ea9c",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "2e65e5de-e891-47e8-9b49-241d802139ab",
+        "lessonId": "573590a5-e3c6-4ca9-baab-a6895e6b3b8c",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "318a0b7b-1d92-4bed-bbc0-1af4f8c3c82b",
+    "sectionId": "a3e3dbd9-0e06-4181-b86e-85daee95ea9c",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "3ebb4035-d9b5-4325-9a57-fc48cd099be6",
+        "lessonId": "318a0b7b-1d92-4bed-bbc0-1af4f8c3c82b",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "649fc2e4-6cf0-41af-933d-c7ade9d68d41",
+        "lessonId": "318a0b7b-1d92-4bed-bbc0-1af4f8c3c82b",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "2cd76bad-6f7c-4519-8ac4-ad59c77830c6",
+    "sectionId": "424fcb37-2648-4efe-8c50-9ff79d140a88",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "a300010f-006e-459e-adc7-cca03edae2da",
+        "lessonId": "2cd76bad-6f7c-4519-8ac4-ad59c77830c6",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "ec633afd-8991-4a1a-bea6-6e6644b81ccf",
+    "sectionId": "424fcb37-2648-4efe-8c50-9ff79d140a88",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "f1a092f8-14f7-4470-951b-02fd6eae6b66",
+        "lessonId": "ec633afd-8991-4a1a-bea6-6e6644b81ccf",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "977bcb35-78f4-4240-a7cf-0df17c6f6597",
+        "lessonId": "ec633afd-8991-4a1a-bea6-6e6644b81ccf",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "ee5716d0-6ad3-4328-9bad-bcc54e83615a",
+    "sectionId": "424fcb37-2648-4efe-8c50-9ff79d140a88",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "2ec91fcb-2b8b-48d8-9ad7-473382a23862",
+        "lessonId": "ee5716d0-6ad3-4328-9bad-bcc54e83615a",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "1ac3041d-7a6c-483c-9043-2ee2469c2d0a",
+    "sectionId": "424fcb37-2648-4efe-8c50-9ff79d140a88",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "814f8775-9e85-43e1-b4e2-67c6a35a8b70",
+        "lessonId": "1ac3041d-7a6c-483c-9043-2ee2469c2d0a",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "d66d65bd-104b-4ddb-bf49-7b2145059a66",
+        "lessonId": "1ac3041d-7a6c-483c-9043-2ee2469c2d0a",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "e5d91e4e-adc5-4196-a840-e211ed91f341",
+        "lessonId": "1ac3041d-7a6c-483c-9043-2ee2469c2d0a",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "8a6bc1c3-2301-428a-9a1d-c7a56da4d6d2"
+      }
+    ]
+  },
+  {
+    "id": "d9f8e686-716c-4398-9815-261783188159",
+    "sectionId": "a80b98ec-1a4a-4dc6-a21a-5ed63c70d976",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "747d0448-c5b8-4592-9927-c4ed216e10a6",
+        "lessonId": "d9f8e686-716c-4398-9815-261783188159",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "2a84447a-080e-4d9d-8675-f9f51e847360",
+    "sectionId": "a80b98ec-1a4a-4dc6-a21a-5ed63c70d976",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "2bd3db22-68b6-49b2-8ad2-8b230d5d631f",
+        "lessonId": "2a84447a-080e-4d9d-8675-f9f51e847360",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "b1d6182a-ccb4-43bf-a491-f03d5d6559de",
+        "lessonId": "2a84447a-080e-4d9d-8675-f9f51e847360",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "b86a3d65-cf01-445e-ab3f-9e1bceeee6ca",
+    "sectionId": "a80b98ec-1a4a-4dc6-a21a-5ed63c70d976",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "7007dc51-b3dd-47e7-a713-a513ff7fdc66",
+        "lessonId": "b86a3d65-cf01-445e-ab3f-9e1bceeee6ca",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "ab9f961c-06bd-4728-9e5e-86113ca69109",
+    "sectionId": "a80b98ec-1a4a-4dc6-a21a-5ed63c70d976",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "8449095e-1eb9-4aa2-a6f9-d2e6781481ec",
+        "lessonId": "ab9f961c-06bd-4728-9e5e-86113ca69109",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "2f424c16-476a-4b94-b1b2-e374c9604a87",
+        "lessonId": "ab9f961c-06bd-4728-9e5e-86113ca69109",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "0e444fb5-d605-4bea-9a7e-e0f9c0dd182b",
+        "lessonId": "ab9f961c-06bd-4728-9e5e-86113ca69109",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "714781ef-a2d4-448f-ad10-d0e86556de9d"
+      }
+    ]
+  },
+  {
+    "id": "b8c0ca05-7628-451c-9062-2f996716ccc8",
+    "sectionId": "eac1d532-e384-4874-b269-5abd8bac9a69",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "f20668d8-03d5-4458-a968-b436a2072474",
+        "lessonId": "b8c0ca05-7628-451c-9062-2f996716ccc8",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "b721c69e-6790-4969-8887-e697e71861ef",
+    "sectionId": "eac1d532-e384-4874-b269-5abd8bac9a69",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "10663464-1d06-4ff9-8f4d-76cf505f28e7",
+        "lessonId": "b721c69e-6790-4969-8887-e697e71861ef",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "1e9e78ca-26c2-49f1-bc5c-e2989aa92591",
+        "lessonId": "b721c69e-6790-4969-8887-e697e71861ef",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "7423be1c-7ee4-449d-b39f-87d267fc92a0",
+    "sectionId": "eac1d532-e384-4874-b269-5abd8bac9a69",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "aa3b03c8-2f0f-4da4-8dd6-13c3e6504277",
+        "lessonId": "7423be1c-7ee4-449d-b39f-87d267fc92a0",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "7fb8ecd7-1a41-40ba-98b3-7e41931ca354",
+    "sectionId": "eac1d532-e384-4874-b269-5abd8bac9a69",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "86e32dd5-b25f-46f5-827e-01c92a5f4cf3",
+        "lessonId": "7fb8ecd7-1a41-40ba-98b3-7e41931ca354",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "31748ca3-9ed6-4a80-bb92-216a280301d1",
+        "lessonId": "7fb8ecd7-1a41-40ba-98b3-7e41931ca354",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "cb89649a-fe78-42c6-938a-9d2a0f00e5a9",
+    "sectionId": "73c63ed5-b72e-45e5-a074-908ab42665ac",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "45ede2ef-f47d-472c-9317-74ef99a3aef1",
+        "lessonId": "cb89649a-fe78-42c6-938a-9d2a0f00e5a9",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "1f089585-7de2-4b7c-989f-f8f012ea1fc6",
+    "sectionId": "73c63ed5-b72e-45e5-a074-908ab42665ac",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "868c9fd9-0ad9-4db4-9171-51cb090fdef9",
+        "lessonId": "1f089585-7de2-4b7c-989f-f8f012ea1fc6",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "494cfe47-7888-4033-ab5f-4720aabe5dbc",
+        "lessonId": "1f089585-7de2-4b7c-989f-f8f012ea1fc6",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "edf147c6-7344-43d9-8310-c01d19bd0857",
+    "sectionId": "73c63ed5-b72e-45e5-a074-908ab42665ac",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "c9d6bc82-1700-4ec9-b9ef-0560e90a3382",
+        "lessonId": "edf147c6-7344-43d9-8310-c01d19bd0857",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "597448af-6cc0-4c53-9d47-40fb2dce6436",
+    "sectionId": "73c63ed5-b72e-45e5-a074-908ab42665ac",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "4bca8c40-0d69-451c-be0d-cbaa4c2326be",
+        "lessonId": "597448af-6cc0-4c53-9d47-40fb2dce6436",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "befac8b5-5112-41d0-b89e-6edf7a277dc5",
+        "lessonId": "597448af-6cc0-4c53-9d47-40fb2dce6436",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "4894fece-6d33-4aed-815d-cc329c290b85",
+        "lessonId": "597448af-6cc0-4c53-9d47-40fb2dce6436",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "76115f5e-ff41-4726-9e09-799df74818dc"
+      }
+    ]
+  },
+  {
+    "id": "0aaee7f7-002e-4e40-98f2-1cb27528a4d0",
+    "sectionId": "67291925-a79f-495e-bc2e-4a6adc263e80",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "0945c65b-fdf5-4ed2-88b1-9a2c04fd6f37",
+        "lessonId": "0aaee7f7-002e-4e40-98f2-1cb27528a4d0",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "4ad62d1e-8037-4a51-a61a-05a81a6c5a48",
+    "sectionId": "67291925-a79f-495e-bc2e-4a6adc263e80",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "1cbf26e3-adc8-487b-8fba-426bff6e9ec4",
+        "lessonId": "4ad62d1e-8037-4a51-a61a-05a81a6c5a48",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "01d921ff-b8f5-45d0-ab03-6b0e6654a3cd",
+        "lessonId": "4ad62d1e-8037-4a51-a61a-05a81a6c5a48",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "bddab8a4-339c-431b-b9e7-55affb7e248e",
+    "sectionId": "67291925-a79f-495e-bc2e-4a6adc263e80",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "8ba7514e-ed66-45a3-b835-cce013ae79f9",
+        "lessonId": "bddab8a4-339c-431b-b9e7-55affb7e248e",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "f71dcd12-c09d-4ee6-b9e3-d05ba0061305",
+    "sectionId": "67291925-a79f-495e-bc2e-4a6adc263e80",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "f92b17dc-c513-4fb1-a24c-9c5744ee75d5",
+        "lessonId": "f71dcd12-c09d-4ee6-b9e3-d05ba0061305",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "caaef739-22cf-47e4-828f-51eda67f8d1f",
+        "lessonId": "f71dcd12-c09d-4ee6-b9e3-d05ba0061305",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "da7e9598-f885-4710-a211-2b197e23eb3a",
+        "lessonId": "f71dcd12-c09d-4ee6-b9e3-d05ba0061305",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "5ba82528-4c54-47dc-959e-3b3fb17ea327"
+      }
+    ]
+  },
+  {
+    "id": "e8c5bcf4-8412-4594-a6aa-b5c4225f3958",
+    "sectionId": "4411f596-f4dc-4216-b3b5-7a7f34c85354",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "8094c602-9316-4ab2-b4a5-5cd39d3a60a1",
+        "lessonId": "e8c5bcf4-8412-4594-a6aa-b5c4225f3958",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "01b7acad-5002-4f9a-a965-b9fc6c7668e7",
+    "sectionId": "4411f596-f4dc-4216-b3b5-7a7f34c85354",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "d192754c-5d6b-4804-befa-713cbc4bb1ac",
+        "lessonId": "01b7acad-5002-4f9a-a965-b9fc6c7668e7",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "89a9c5b4-b9fa-47d8-9e1e-50f1b446fe12",
+        "lessonId": "01b7acad-5002-4f9a-a965-b9fc6c7668e7",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "228af0e4-d6f8-4ca2-b94b-8649231423d3",
+    "sectionId": "4411f596-f4dc-4216-b3b5-7a7f34c85354",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "43630243-ea1e-478b-ac87-682cb88c51fe",
+        "lessonId": "228af0e4-d6f8-4ca2-b94b-8649231423d3",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "96c00791-a1a3-43a7-bc83-80271b2b3870",
+    "sectionId": "4411f596-f4dc-4216-b3b5-7a7f34c85354",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "f8c38ff4-7208-47da-8379-aa734ca49879",
+        "lessonId": "96c00791-a1a3-43a7-bc83-80271b2b3870",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "d269a5d8-e16c-4ac4-91c9-e952c1536be3",
+        "lessonId": "96c00791-a1a3-43a7-bc83-80271b2b3870",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "c4302c49-a23e-4857-9487-95b374019733",
+    "sectionId": "fb1ede67-5eba-4a02-9a9c-e8b75a6f1bc8",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "6e5b35e0-d68a-4500-a9f3-8156112710c2",
+        "lessonId": "c4302c49-a23e-4857-9487-95b374019733",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "bd152a38-cd58-4938-8024-055b3a0f26c8",
+    "sectionId": "fb1ede67-5eba-4a02-9a9c-e8b75a6f1bc8",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "a2af84d6-4044-432b-8522-79e042ec64cd",
+        "lessonId": "bd152a38-cd58-4938-8024-055b3a0f26c8",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "6eceeebf-e384-4815-8cd8-f3eedfd10807",
+        "lessonId": "bd152a38-cd58-4938-8024-055b3a0f26c8",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "74053598-aa6f-4bf1-a4e8-f2dc785d6107",
+    "sectionId": "fb1ede67-5eba-4a02-9a9c-e8b75a6f1bc8",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "1e5f3bed-5eef-4bbe-8fe4-889994814652",
+        "lessonId": "74053598-aa6f-4bf1-a4e8-f2dc785d6107",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "34989944-e1d3-4e99-9195-7ce780231446",
+    "sectionId": "fb1ede67-5eba-4a02-9a9c-e8b75a6f1bc8",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "c82d0311-eff0-40e9-9616-c2f3b29262ff",
+        "lessonId": "34989944-e1d3-4e99-9195-7ce780231446",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "ce20a211-3e51-4dc9-aac5-a350a2b3fa54",
+        "lessonId": "34989944-e1d3-4e99-9195-7ce780231446",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "c28fdf49-a4c9-4b57-80e4-4da9d3f99b37",
+        "lessonId": "34989944-e1d3-4e99-9195-7ce780231446",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "ce21e3ea-2248-4357-ac26-ecd7e3743aba"
+      }
+    ]
+  },
+  {
+    "id": "179980a9-8966-405c-b7e3-9c5f40135e45",
+    "sectionId": "e0a13d4b-5b6f-46a0-afb4-6552c70ccec9",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "313e21d9-b623-44cd-ab24-cb16988967ed",
+        "lessonId": "179980a9-8966-405c-b7e3-9c5f40135e45",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "650fb0d3-b900-4c63-a73a-c131fc9da4c9",
+    "sectionId": "e0a13d4b-5b6f-46a0-afb4-6552c70ccec9",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "89a87377-82f6-4f89-bfc6-d6d0ec8ba587",
+        "lessonId": "650fb0d3-b900-4c63-a73a-c131fc9da4c9",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "430fa001-50e1-4813-a5ca-b019a0b0993d",
+        "lessonId": "650fb0d3-b900-4c63-a73a-c131fc9da4c9",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "1b308792-1376-47db-a08d-8153d4e133ef",
+    "sectionId": "e0a13d4b-5b6f-46a0-afb4-6552c70ccec9",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "03cb4066-24e6-4cb6-b594-d5f7adfd4e6c",
+        "lessonId": "1b308792-1376-47db-a08d-8153d4e133ef",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "39566c8c-e032-4d62-945d-900b86fc207d",
+    "sectionId": "e0a13d4b-5b6f-46a0-afb4-6552c70ccec9",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "c591c739-fd6b-4087-aa0a-2ba516652998",
+        "lessonId": "39566c8c-e032-4d62-945d-900b86fc207d",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "db5e5446-cb1e-49e6-b9f3-62f881fbf9c5",
+        "lessonId": "39566c8c-e032-4d62-945d-900b86fc207d",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "814e664e-a630-486e-a3ea-b7228168732a",
+        "lessonId": "39566c8c-e032-4d62-945d-900b86fc207d",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "10855f3b-779a-466c-b4f1-2b43176e5bb9"
+      }
+    ]
+  },
+  {
+    "id": "298dbd3c-ae74-4c03-b531-aa7ac33bd789",
+    "sectionId": "8ef9bb69-5aee-4ed4-853d-711652d55f73",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "00bb8d49-60bf-4eea-a958-d08764d1f1c3",
+        "lessonId": "298dbd3c-ae74-4c03-b531-aa7ac33bd789",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "363c189e-0a23-45ed-b5e0-7be5bb8f4917",
+    "sectionId": "8ef9bb69-5aee-4ed4-853d-711652d55f73",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "cb51ebc1-fa1c-40ce-acc1-ae6a1c324125",
+        "lessonId": "363c189e-0a23-45ed-b5e0-7be5bb8f4917",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "cade7710-1d79-429b-95b0-fbc994d248af",
+        "lessonId": "363c189e-0a23-45ed-b5e0-7be5bb8f4917",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "7eda5468-cc3a-462d-9eba-fe409a91cabe",
+    "sectionId": "8ef9bb69-5aee-4ed4-853d-711652d55f73",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "927cc331-18a1-421b-80e7-a3b7ee3ef195",
+        "lessonId": "7eda5468-cc3a-462d-9eba-fe409a91cabe",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "527e8621-a624-421e-9e1d-3234918c5de6",
+    "sectionId": "8ef9bb69-5aee-4ed4-853d-711652d55f73",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "1b3b4c59-eba3-4478-b7a6-1b8f34bb1ff1",
+        "lessonId": "527e8621-a624-421e-9e1d-3234918c5de6",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "a663b8a9-6382-4698-86b8-3d04060af61a",
+        "lessonId": "527e8621-a624-421e-9e1d-3234918c5de6",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "fce576fc-774a-44ff-bdfc-6fd0b5674f67",
+    "sectionId": "dbe92631-38d5-448a-b8cd-9220c923505e",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "7c7f1ebd-f4d8-466b-a94a-b550f4dd884e",
+        "lessonId": "fce576fc-774a-44ff-bdfc-6fd0b5674f67",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "64c8ef5c-7859-4115-8348-bacfa6333c15",
+    "sectionId": "dbe92631-38d5-448a-b8cd-9220c923505e",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "a0cb0d7b-db3b-41b0-9090-820ace834a15",
+        "lessonId": "64c8ef5c-7859-4115-8348-bacfa6333c15",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "d0a4c045-d4a5-4579-a58d-ebabdaf00a37",
+        "lessonId": "64c8ef5c-7859-4115-8348-bacfa6333c15",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "0c08ec80-997c-4624-a881-768ca81788b6",
+    "sectionId": "dbe92631-38d5-448a-b8cd-9220c923505e",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "3ecb0d36-54c9-492f-a23c-4517521d8968",
+        "lessonId": "0c08ec80-997c-4624-a881-768ca81788b6",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "9e03d5ba-edd7-4c89-bf12-1ef3f03f3bae",
+    "sectionId": "dbe92631-38d5-448a-b8cd-9220c923505e",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "76946824-9f42-41bb-a1b9-32f80edf9af5",
+        "lessonId": "9e03d5ba-edd7-4c89-bf12-1ef3f03f3bae",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "144ff086-bb00-452f-b7d9-caef6e631f1d",
+        "lessonId": "9e03d5ba-edd7-4c89-bf12-1ef3f03f3bae",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "49696c7d-db2f-4f9e-8ea1-6c3417158e76",
+        "lessonId": "9e03d5ba-edd7-4c89-bf12-1ef3f03f3bae",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "7b6820e2-f902-4199-8195-2c3eac45e88a"
+      }
+    ]
+  },
+  {
+    "id": "4dc0787f-2180-43f2-bbc8-8ae8d6a68c0c",
+    "sectionId": "80485f4c-bd9c-4d3d-91fa-ded4d0f9e2d4",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "0aa9977e-43a4-45ee-973a-d535966271a6",
+        "lessonId": "4dc0787f-2180-43f2-bbc8-8ae8d6a68c0c",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "b03596a1-e941-4b47-ab35-b2154eb6932b",
+    "sectionId": "80485f4c-bd9c-4d3d-91fa-ded4d0f9e2d4",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "a47c1050-569c-45a4-86ac-67d4ba76d7d1",
+        "lessonId": "b03596a1-e941-4b47-ab35-b2154eb6932b",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "5b891a9a-1010-4333-9614-a189e44f8413",
+        "lessonId": "b03596a1-e941-4b47-ab35-b2154eb6932b",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "c70021e3-7951-4e81-ad10-8739881ed32e",
+    "sectionId": "80485f4c-bd9c-4d3d-91fa-ded4d0f9e2d4",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "dd3e324a-996e-4629-8679-de77aedfa018",
+        "lessonId": "c70021e3-7951-4e81-ad10-8739881ed32e",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "21079bf2-87ca-4836-a8a6-1679cea1c873",
+    "sectionId": "80485f4c-bd9c-4d3d-91fa-ded4d0f9e2d4",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "cbba3d23-af04-4c2f-a90f-7161345478c4",
+        "lessonId": "21079bf2-87ca-4836-a8a6-1679cea1c873",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "36895f5c-9dbc-41a7-b56e-bb867d25d5a1",
+        "lessonId": "21079bf2-87ca-4836-a8a6-1679cea1c873",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "e4eb8617-73fb-419e-86d8-34c9b9d278fe",
+        "lessonId": "21079bf2-87ca-4836-a8a6-1679cea1c873",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "416bac38-09a9-4551-94e7-947a210e1e6a"
+      }
+    ]
+  },
+  {
+    "id": "454b25ff-be33-4c63-b2c6-165191974dc2",
+    "sectionId": "91655f47-81d0-42e0-95b9-09438565af1d",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "cd58af0f-e4e0-4635-86e6-160b59deca84",
+        "lessonId": "454b25ff-be33-4c63-b2c6-165191974dc2",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "77b8fb49-acbb-4add-80b7-6fb505071b27",
+    "sectionId": "91655f47-81d0-42e0-95b9-09438565af1d",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "8d8115e8-c72f-4e0b-9f26-1dfd9b3718b6",
+        "lessonId": "77b8fb49-acbb-4add-80b7-6fb505071b27",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "60cf154d-d522-4f02-89f8-74213fe237fc",
+        "lessonId": "77b8fb49-acbb-4add-80b7-6fb505071b27",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "b42a17b8-37c5-4906-8994-2b9bbcd934a3",
+    "sectionId": "91655f47-81d0-42e0-95b9-09438565af1d",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "0e336f4c-fa84-4e6c-9d41-d30ce48f29e2",
+        "lessonId": "b42a17b8-37c5-4906-8994-2b9bbcd934a3",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "8c63404d-2315-485a-919a-68abedd496d6",
+    "sectionId": "91655f47-81d0-42e0-95b9-09438565af1d",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "2e4e09fe-3852-459b-8a35-fb7ee0304c4b",
+        "lessonId": "8c63404d-2315-485a-919a-68abedd496d6",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "dc2ddc15-18bf-49cc-90dc-da7c0c232d7a",
+        "lessonId": "8c63404d-2315-485a-919a-68abedd496d6",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "8d8139c5-1e00-45e1-bfe9-be0d3ef68f42",
+    "sectionId": "ad198a7b-aa31-4093-ab62-36e0d39df661",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "2d202785-c328-44cd-944f-dad243a33032",
+        "lessonId": "8d8139c5-1e00-45e1-bfe9-be0d3ef68f42",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "97157c76-732c-4cd1-b107-9bc0a49ca5b4",
+    "sectionId": "ad198a7b-aa31-4093-ab62-36e0d39df661",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "f7214ae7-d922-4019-9493-83ef0452c18c",
+        "lessonId": "97157c76-732c-4cd1-b107-9bc0a49ca5b4",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "0e42ff7d-cda0-4322-b164-93fd649234cf",
+        "lessonId": "97157c76-732c-4cd1-b107-9bc0a49ca5b4",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "3100362e-e3d1-40ab-ba8b-7393803f1c71",
+    "sectionId": "ad198a7b-aa31-4093-ab62-36e0d39df661",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "7ea33521-3772-458e-820a-0c03cd9c0aeb",
+        "lessonId": "3100362e-e3d1-40ab-ba8b-7393803f1c71",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "5fb5792a-4bcf-4851-8c82-b9d5fd2276d3",
+    "sectionId": "ad198a7b-aa31-4093-ab62-36e0d39df661",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "860c3c5b-7928-4b0e-85d2-1dc82bd1dbd6",
+        "lessonId": "5fb5792a-4bcf-4851-8c82-b9d5fd2276d3",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "7881c27d-2854-4c73-a58c-f7fede96d768",
+        "lessonId": "5fb5792a-4bcf-4851-8c82-b9d5fd2276d3",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "2c07084c-56d2-4650-b079-248b3f2a258c",
+        "lessonId": "5fb5792a-4bcf-4851-8c82-b9d5fd2276d3",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "7c6b40f2-3230-4fc1-aad9-5f109c05b8b9"
+      }
+    ]
+  },
+  {
+    "id": "0c492ebd-8303-410e-8819-02382c0e8560",
+    "sectionId": "95026141-21a4-4033-b3a6-5e4275a1611c",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "edc1e54f-1870-41fe-a0bb-cf745eeee8d1",
+        "lessonId": "0c492ebd-8303-410e-8819-02382c0e8560",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "2f1344f0-3668-4204-bfb2-b880becceec0",
+    "sectionId": "95026141-21a4-4033-b3a6-5e4275a1611c",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "10b08406-7ed3-4593-b254-b821368bc1f4",
+        "lessonId": "2f1344f0-3668-4204-bfb2-b880becceec0",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "a804cfa7-7622-43a2-b09b-1d15a4eb8ecb",
+        "lessonId": "2f1344f0-3668-4204-bfb2-b880becceec0",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "2db8085b-de29-4e00-b9a4-1cf8f607376f",
+    "sectionId": "95026141-21a4-4033-b3a6-5e4275a1611c",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "7c3754b1-5451-47e6-b105-d3ea014b2def",
+        "lessonId": "2db8085b-de29-4e00-b9a4-1cf8f607376f",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "514060a8-6454-4b4d-b68b-82a39b81ffde",
+    "sectionId": "95026141-21a4-4033-b3a6-5e4275a1611c",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "6baf88a3-5afa-459d-8ded-0d7495226d51",
+        "lessonId": "514060a8-6454-4b4d-b68b-82a39b81ffde",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "5cd8a396-deb2-4927-aea8-3726c61e1649",
+        "lessonId": "514060a8-6454-4b4d-b68b-82a39b81ffde",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "0751d769-c3ea-44da-a32f-e3cf76447026",
+        "lessonId": "514060a8-6454-4b4d-b68b-82a39b81ffde",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "78aa0268-e051-4132-a0c8-3773b8f17a71"
+      }
+    ]
+  },
+  {
+    "id": "2c64c233-9344-4c21-90e0-57d8338822dc",
+    "sectionId": "373ba1ff-0893-4844-b4ed-5b74f77662b9",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "108dd801-46ba-4a5e-9411-f9b5e6300c5f",
+        "lessonId": "2c64c233-9344-4c21-90e0-57d8338822dc",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "2105ea32-d242-4548-8b0a-bf137f0da9fc",
+    "sectionId": "373ba1ff-0893-4844-b4ed-5b74f77662b9",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "29d8dd4a-bfca-459e-99ef-913094f25d66",
+        "lessonId": "2105ea32-d242-4548-8b0a-bf137f0da9fc",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "edda5225-3e82-40ec-a2d0-d824ff01a6eb",
+        "lessonId": "2105ea32-d242-4548-8b0a-bf137f0da9fc",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "72ef6a7e-5d7c-43cc-9504-debe1e3e3f60",
+    "sectionId": "373ba1ff-0893-4844-b4ed-5b74f77662b9",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "17d268ca-5e6f-4f74-9514-e593055194e5",
+        "lessonId": "72ef6a7e-5d7c-43cc-9504-debe1e3e3f60",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "98f02375-efdd-4be7-a3fe-bc3f44c47429",
+    "sectionId": "373ba1ff-0893-4844-b4ed-5b74f77662b9",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "77a5e183-b5ec-4a7b-80e2-4d1a13227aa7",
+        "lessonId": "98f02375-efdd-4be7-a3fe-bc3f44c47429",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "3cee86d1-a16a-4903-b29d-8591794e17a1",
+        "lessonId": "98f02375-efdd-4be7-a3fe-bc3f44c47429",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "d4cbac80-0bf3-480a-9388-566a927ccf02",
+    "sectionId": "55d28f81-3d7a-4b4f-9e29-b794d0bee7cb",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "872147c3-69ec-4fe9-a6a7-ba2570edc72b",
+        "lessonId": "d4cbac80-0bf3-480a-9388-566a927ccf02",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "55f742e8-95b7-44cb-be44-e6df5cdcd86d",
+    "sectionId": "55d28f81-3d7a-4b4f-9e29-b794d0bee7cb",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "1b0eddea-bff5-478c-aa54-aeba28a0a664",
+        "lessonId": "55f742e8-95b7-44cb-be44-e6df5cdcd86d",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "7968b28a-9e29-4174-94ec-cf3852f96dd9",
+        "lessonId": "55f742e8-95b7-44cb-be44-e6df5cdcd86d",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "b7e2ed86-1a14-496f-a53f-228c77e858b5",
+    "sectionId": "55d28f81-3d7a-4b4f-9e29-b794d0bee7cb",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "a8c05031-5f32-4b24-aa78-73ea766efd7a",
+        "lessonId": "b7e2ed86-1a14-496f-a53f-228c77e858b5",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "96acb3eb-7e6b-4816-a72c-6fbc35e4d5fe",
+    "sectionId": "55d28f81-3d7a-4b4f-9e29-b794d0bee7cb",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "4dffc295-4904-4e46-989b-cf67d437dfd0",
+        "lessonId": "96acb3eb-7e6b-4816-a72c-6fbc35e4d5fe",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "67071637-b7c5-4830-ba4e-8bbae503c979",
+        "lessonId": "96acb3eb-7e6b-4816-a72c-6fbc35e4d5fe",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "4517de65-7066-41c9-a2b5-ac19bac93e73",
+        "lessonId": "96acb3eb-7e6b-4816-a72c-6fbc35e4d5fe",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "b9953480-4729-480d-958e-9be6816bd8dd"
+      }
+    ]
+  },
+  {
+    "id": "445abcf5-0d4e-4daa-863b-9ffea8c914cb",
+    "sectionId": "4bdbc187-00c5-4481-aa61-ae43e56ffb6c",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "5ab086d5-cf23-4e6a-97b0-17bb40ff376c",
+        "lessonId": "445abcf5-0d4e-4daa-863b-9ffea8c914cb",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "99d72a38-86c5-4804-b494-fce88ca298df",
+    "sectionId": "4bdbc187-00c5-4481-aa61-ae43e56ffb6c",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "08e8e591-23cf-4c6c-9259-07818b120ab1",
+        "lessonId": "99d72a38-86c5-4804-b494-fce88ca298df",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "ec753ba8-09d6-465d-bde3-5017cf7a1495",
+        "lessonId": "99d72a38-86c5-4804-b494-fce88ca298df",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "a73b07bd-b93b-4bad-a198-e8ca0c6365d2",
+    "sectionId": "4bdbc187-00c5-4481-aa61-ae43e56ffb6c",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "d2dffb47-e507-4395-91f4-67dfadfb5b8a",
+        "lessonId": "a73b07bd-b93b-4bad-a198-e8ca0c6365d2",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "11ef8ecd-743c-489c-b20e-eac8582c0940",
+    "sectionId": "4bdbc187-00c5-4481-aa61-ae43e56ffb6c",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "cb3a7213-dda4-4614-af08-8010348d9598",
+        "lessonId": "11ef8ecd-743c-489c-b20e-eac8582c0940",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "163215a4-21ed-4da6-a720-6a2d5d79f8d7",
+        "lessonId": "11ef8ecd-743c-489c-b20e-eac8582c0940",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "b20d5738-0a69-4b39-9a3d-8529b191a6f1",
+        "lessonId": "11ef8ecd-743c-489c-b20e-eac8582c0940",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "26d43800-f331-4df7-8123-76d6502fd707"
+      }
+    ]
+  },
+  {
+    "id": "84ac5cb3-8bc7-4b8b-90ce-0df465a49fb3",
+    "sectionId": "a50215ff-12b9-4f5b-8f71-b5992516ea5b",
+    "title": "Lesson 1: 1.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "57acb2af-bec0-4e06-a020-93f5daef7612",
+        "lessonId": "84ac5cb3-8bc7-4b8b-90ce-0df465a49fb3",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "a32f71c9-bf87-4aef-8ce4-136caf5c07b8",
+    "sectionId": "a50215ff-12b9-4f5b-8f71-b5992516ea5b",
+    "title": "Lesson 2: 1.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "148e7808-2586-4a65-ba68-9a02db33b903",
+        "lessonId": "a32f71c9-bf87-4aef-8ce4-136caf5c07b8",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "70743d4e-b97e-437a-9f8d-9f05058a5388",
+        "lessonId": "a32f71c9-bf87-4aef-8ce4-136caf5c07b8",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "9e2c648c-c88c-4913-ba4c-6c1f84689b77",
+    "sectionId": "a50215ff-12b9-4f5b-8f71-b5992516ea5b",
+    "title": "Lesson 3: 1.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "e7f65605-fbd0-4236-ab50-69ad66e8a328",
+        "lessonId": "9e2c648c-c88c-4913-ba4c-6c1f84689b77",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "29b7e3ff-141e-4e84-95c1-f0dc5f803e21",
+    "sectionId": "a50215ff-12b9-4f5b-8f71-b5992516ea5b",
+    "title": "Lesson 4: 1.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "a2deba63-cd37-47ba-a158-c7cc2f391c9f",
+        "lessonId": "29b7e3ff-141e-4e84-95c1-f0dc5f803e21",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "a95023c4-f01a-4c4a-8482-399aaf5cd448",
+        "lessonId": "29b7e3ff-141e-4e84-95c1-f0dc5f803e21",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "d8e760e4-33ea-40a9-b0cd-903ea883b75c",
+    "sectionId": "7ad457ad-c317-410d-a3dc-dcd91b1bcd17",
+    "title": "Lesson 1: 2.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "95ca8557-1537-41c2-a872-8f9a122387ae",
+        "lessonId": "d8e760e4-33ea-40a9-b0cd-903ea883b75c",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "c58ae6cb-a7af-4986-a01b-8835f53ef5dd",
+    "sectionId": "7ad457ad-c317-410d-a3dc-dcd91b1bcd17",
+    "title": "Lesson 2: 2.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "e0885cc6-2488-4479-a27d-57ee4debb083",
+        "lessonId": "c58ae6cb-a7af-4986-a01b-8835f53ef5dd",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "b0c30303-2341-462c-a42c-4d900c750ec8",
+        "lessonId": "c58ae6cb-a7af-4986-a01b-8835f53ef5dd",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "721b270b-443b-407b-8c03-0a859208372a",
+    "sectionId": "7ad457ad-c317-410d-a3dc-dcd91b1bcd17",
+    "title": "Lesson 3: 2.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "01c5b8ca-24df-4c4b-bc48-874c840bc89f",
+        "lessonId": "721b270b-443b-407b-8c03-0a859208372a",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "dc50b601-460a-4081-aaf2-0f19dbf82e3c",
+    "sectionId": "7ad457ad-c317-410d-a3dc-dcd91b1bcd17",
+    "title": "Lesson 4: 2.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "cffb68fa-b1d5-41a4-b79e-60ce8b97f423",
+        "lessonId": "dc50b601-460a-4081-aaf2-0f19dbf82e3c",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "b49a1e94-afe2-4c79-9898-6e46d6315d57",
+        "lessonId": "dc50b601-460a-4081-aaf2-0f19dbf82e3c",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "3939e906-7622-4308-8963-d720aa94d174",
+        "lessonId": "dc50b601-460a-4081-aaf2-0f19dbf82e3c",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "a8c84d54-23bb-46e1-8531-6157d790e906"
+      }
+    ]
+  },
+  {
+    "id": "d1e9772f-1935-43d1-9867-5ef833c39263",
+    "sectionId": "4d86cd47-d15c-428e-a63a-c2c164f9d001",
+    "title": "Lesson 1: 3.1 Module Power Session",
+    "order": 1,
+    "assets": [
+      {
+        "id": "808379ab-202a-4880-ad81-f7a8cdb8bea7",
+        "lessonId": "d1e9772f-1935-43d1-9867-5ef833c39263",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "67a2f30d-6a2b-443e-9307-e0ca2d847b1c",
+    "sectionId": "4d86cd47-d15c-428e-a63a-c2c164f9d001",
+    "title": "Lesson 2: 3.2 Module Power Session",
+    "order": 2,
+    "assets": [
+      {
+        "id": "b727deca-7e2c-427e-a195-fa91da939b21",
+        "lessonId": "67a2f30d-6a2b-443e-9307-e0ca2d847b1c",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "2e6bfaff-48cd-491a-aca9-804085242840",
+        "lessonId": "67a2f30d-6a2b-443e-9307-e0ca2d847b1c",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "90f642c8-7330-44c5-9e68-e16f7ae092bd",
+    "sectionId": "4d86cd47-d15c-428e-a63a-c2c164f9d001",
+    "title": "Lesson 3: 3.3 Module Power Session",
+    "order": 3,
+    "assets": [
+      {
+        "id": "72f1f192-192e-4d06-bca7-9acd7a436775",
+        "lessonId": "90f642c8-7330-44c5-9e68-e16f7ae092bd",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      }
+    ]
+  },
+  {
+    "id": "b3b97791-3504-4f94-8e11-57a6bfecdbc2",
+    "sectionId": "4d86cd47-d15c-428e-a63a-c2c164f9d001",
+    "title": "Lesson 4: 3.4 Module Power Session",
+    "order": 4,
+    "assets": [
+      {
+        "id": "a9a65ef5-f681-48b1-bc6d-dae92454ea73",
+        "lessonId": "b3b97791-3504-4f94-8e11-57a6bfecdbc2",
+        "title": "Video Lecture",
+        "type": "VIDEO",
+        "isPreview": false,
+        "order": 1,
+        "bunnyVideoId": "demo-video-id",
+        "storageKey": null,
+        "quizId": null
+      },
+      {
+        "id": "59ad4434-2b12-483c-b795-ba3228a8b874",
+        "lessonId": "b3b97791-3504-4f94-8e11-57a6bfecdbc2",
+        "title": "Resource PDF",
+        "type": "PDF",
+        "isPreview": false,
+        "order": 2,
+        "bunnyVideoId": null,
+        "storageKey": "demo-pdf-key",
+        "quizId": null
+      },
+      {
+        "id": "5a5d85a8-6629-4f22-b9cc-5a825c96396b",
+        "lessonId": "b3b97791-3504-4f94-8e11-57a6bfecdbc2",
+        "title": "Chapter Assessment",
+        "type": "QUIZ",
+        "isPreview": false,
+        "order": 3,
+        "bunnyVideoId": null,
+        "storageKey": null,
+        "quizId": "9dc0293a-66d3-40c8-b52b-2b6667ef754e"
+      }
+    ]
+  }
+]
