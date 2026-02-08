@@ -12,59 +12,66 @@ export const errorMiddleware = (
     res: Response,
     next: NextFunction
 ): void => {
+    const isProd = process.env.NODE_ENV === 'production';
+    
     let statusCode = err.statusCode || 500;
     let message = err.message || 'Internal Server Error';
-    let errorDetails = null;
+    let errorDetails: any = isProd ? null : err;
 
-    // Build sanitized context for logging
-    const logContext = {
-        requestId: req.requestId,
-        method: req.method,
-        path: req.originalUrl || req.path,
-        userRole: (req as any).user?.role, // If user attached by auth middleware
-    };
-
-    if (err instanceof ZodError) {
+    // Prisma Handling
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === 'P2002') {
+            statusCode = 409;
+            message = 'السجل موجود مسبقاً'; // 'Conflict'
+            errorDetails = isProd ? null : err.meta;
+        } else if (err.code === 'P2025') {
+            statusCode = 404;
+            message = 'Record not found';
+            // P2025 details are usually safe-ish, but let's follow the general rule if needed, 
+            // but user asked specifically for "Other Prisma errors" rules below. 
+            // P2025 usually keeps its details unless 500 rule hits.
+        } else {
+            // Any other Prisma error (not P2002, not P2025)
+            statusCode = 400;
+            message = 'Bad Request';
+            // Force null validation for production on generic prisma errors
+            if (isProd) {
+                errorDetails = null;
+            }
+        }
+    } else if (err instanceof ZodError) {
         statusCode = 400;
         message = 'Validation Error';
         errorDetails = err.issues.map((issue) => ({
             path: issue.path,
             message: issue.message,
         }));
-        logger.warn('Validation error', { ...logContext, validationErrors: errorDetails });
     } else if (err instanceof AppError) {
         statusCode = err.statusCode;
         message = err.message;
-        if (statusCode >= 500) {
-            logger.error('Application error', logContext, err);
-        } else {
-            logger.warn('Application error', { ...logContext, status: statusCode, message });
-        }
-    } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
-        // Handle unique constraint violations
-        if (err.code === 'P2002') {
-            statusCode = 409;
-            message = 'A record with this value already exists (Unique constraint failed)';
-            errorDetails = err.meta;
-        } else if (err.code === 'P2025') {
-            statusCode = 404;
-            message = 'Record not found';
-        } else {
-            statusCode = 400;
-            message = `Database Error: ${err.message}`;
-        }
-        logger.warn('Database error', { ...logContext, prismaCode: err.code, status: statusCode });
+        // AppErrors are trusted, but bounded by the Golden Rule below
+    }
+
+    // Build sanitized context for logging
+    const logContext = {
+        requestId: (req as any).requestId,
+        method: req.method,
+        path: req.originalUrl || req.path,
+        userRole: (req as any).user?.role,
+        statusCode,
+    };
+
+    // Logging Logic
+    if (statusCode >= 500) {
+        logger.error(message, logContext, err);
     } else {
-        // Log unexpected errors with full stack trace
-        logger.error('Unhandled error', logContext, err);
-        if (process.env.NODE_ENV === 'production') {
-            message = 'Internal Server Error';
-        } else {
-            errorDetails = {
-                stack: err.stack,
-                ...err
-            };
-        }
+        logger.warn(message, { ...logContext, errorDetails });
+    }
+
+    // Golden Rule: In Production, if status >= 500, Force Generic Message
+    if (isProd && statusCode >= 500) {
+        message = 'Internal Server Error';
+        errorDetails = null;
     }
 
     ApiResponse.error(res, errorDetails, message, statusCode);

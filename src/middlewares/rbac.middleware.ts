@@ -10,8 +10,8 @@ export const requireRole = (...roles: string[]) => {
         // START: Role Unification Alias Logic (Single-ADMIN)
         // We treat legacy 'INSTRUCTOR' role as 'ADMIN' for authorization checks.
         // This allows existing users (Enum: INSTRUCTOR) to pass 'ADMIN' guards.
-        const effectiveRoles = [req.user.role];
-        if (req.user.role === 'INSTRUCTOR') {
+        const effectiveRoles: string[] = [req.user?.role || '']; // Ensure array of strings
+        if (req.user?.role === 'INSTRUCTOR') {
             effectiveRoles.push('ADMIN');
         }
 

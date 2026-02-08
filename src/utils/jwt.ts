@@ -7,12 +7,13 @@ const isProduction = process.env.NODE_ENV === 'production';
 const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
 const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
-if (isProduction && (!ACCESS_SECRET || !REFRESH_SECRET)) {
+if (isProduction && (!process.env.JWT_ACCESS_SECRET || !process.env.JWT_REFRESH_SECRET)) {
     throw new Error('FATAL: JWT secrets missing in production environment');
 }
 
-const FINAL_ACCESS_SECRET = ACCESS_SECRET || 'access-secret';
-const FINAL_REFRESH_SECRET = REFRESH_SECRET || 'refresh-secret';
+// SECURITY: In Production, never use the fallback. In Dev, usage is logged or permitted.
+const FINAL_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET || (isProduction ? (() => { throw new Error('JWT Access Secret missing'); })() : 'access-secret');
+const FINAL_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || (isProduction ? (() => { throw new Error('JWT Refresh Secret missing'); })() : 'refresh-secret');
 
 const ACCESS_EXPIRES_IN = process.env.JWT_ACCESS_EXPIRES_IN || '15m';
 const REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d';
