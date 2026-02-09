@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { AdminPurchasesController } from './admin-purchases.controller';
 import { DashboardInsightsController } from './dashboard-insights.controller';
 import { authMiddleware } from '../../middlewares/auth.middleware';
-import { requireRole } from '../../middlewares/rbac.middleware';
+import { requirePanelRole } from '../../middlewares/rbac.middleware';
 import { Role } from '@prisma/client';
 
 const router = Router();
@@ -12,7 +12,7 @@ const insightsController = new DashboardInsightsController();
 
 // All routes require AUTH and ADMIN/INSTRUCTOR role
 router.use(authMiddleware);
-router.use(requireRole(Role.INSTRUCTOR)); // Using INSTRUCTOR as alias for ADMIN per Contract #1
+router.use(requirePanelRole); // Enforces PANEL_ROLES (Instructor + Admin)
 
 router.get('/purchases/pending', purchasesController.listPending);
 router.post('/purchases/:enrollmentId/mark-paid', purchasesController.markPaid);

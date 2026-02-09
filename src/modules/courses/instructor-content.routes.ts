@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { InstructorContentController } from './instructor-content.controller';
 import { authMiddleware } from '../../middlewares/auth.middleware';
-import { requireRole } from '../../middlewares/rbac.middleware';
+import { requirePanelRole } from '../../middlewares/rbac.middleware';
 import { Role } from '@prisma/client';
 
 const router = Router();
@@ -9,7 +9,7 @@ const controller = new InstructorContentController();
 
 // Use middleware for all instructor routes
 router.use(authMiddleware);
-router.use(requireRole('ADMIN'));
+router.use(requirePanelRole);
 
 // Courses
 router.get('/courses', controller.getMyCourses);

@@ -3,7 +3,7 @@ import multer from 'multer';
 import { UploadController } from './upload.controller';
 import { ChunkedUploadController } from './chunked-upload.controller';
 import { authMiddleware } from '../../middlewares/auth.middleware';
-import { requireRole } from '../../middlewares/rbac.middleware';
+import { requirePanelRole, requireAnyRole } from '../../middlewares/rbac.middleware';
 import { Role } from '@prisma/client';
 import { validate } from './validate.middleware';
 import { uploadThumbnailSchema, uploadAvatarSchema, uploadPdfSchema } from './upload.schema';
@@ -61,7 +61,7 @@ const uploadChunk = multer({
  */
 router.get('/uploads/bunny/prepare',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     controller.prepareBunnyUpload
 );
 
@@ -76,7 +76,7 @@ router.get('/uploads/bunny/prepare',
  */
 router.post('/uploads/init',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     chunkedController.initUpload
 );
 
@@ -87,7 +87,7 @@ router.post('/uploads/init',
  */
 router.post('/uploads/chunk',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     uploadChunk.single('chunk'),
     chunkedController.uploadChunk
 );
@@ -99,7 +99,7 @@ router.post('/uploads/chunk',
  */
 router.post('/uploads/finalize',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     chunkedController.finalizeUpload
 );
 
@@ -110,7 +110,7 @@ router.post('/uploads/finalize',
 // Thumbnails
 router.post('/courses/:courseId/thumbnail',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     validate(uploadThumbnailSchema),
     uploadImage.single('file'),
     controller.uploadThumbnail
@@ -127,7 +127,7 @@ router.post('/users/me/avatar',
 // Document Rendering Ingest (Phase 10)
 router.post('/lessons/:lessonId/document',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     validate(uploadPdfSchema),
     uploadPdf.single('file'),
     controller.uploadPdf
@@ -139,7 +139,7 @@ import { publicRateLimiter } from '../../middlewares/rate-limit.middleware';
 // Rendered Page Access (Phase 10)
 router.get('/lessons/:lessonId/pages/:pageNumber',
     authMiddleware,
-    requireRole(Role.STUDENT, 'ADMIN'),
+    requireAnyRole,
     publicRateLimiter,
     // assetFramingGuard removed: Pages are images, no need for frame-ancestors. 
     // The viewer is an img tag, not an iframe.
@@ -149,14 +149,14 @@ router.get('/lessons/:lessonId/pages/:pageNumber',
 // Metadata (Phase 10 Viewer)
 router.get('/lessons/assets/:assetId/document/metadata',
     authMiddleware,
-    requireRole(Role.STUDENT, 'ADMIN'),
+    requireAnyRole,
     controller.getMetadata
 );
 
 // Secure PDF Stream (Phase 10-B)
 router.get('/lessons/assets/:assetId/document/stream',
     authMiddleware,
-    requireRole(Role.STUDENT, 'ADMIN'),
+    requireAnyRole,
     // publicRateLimiter, // Optional: might need stricter limiting? Standard is fine.
     controller.securePdf
 );
@@ -164,7 +164,7 @@ router.get('/lessons/assets/:assetId/document/stream',
 // Video Upload Init
 router.post('/video/init',
     authMiddleware,
-    requireRole('ADMIN'),
+    requirePanelRole,
     controller.initVideoUpload
 );
 
