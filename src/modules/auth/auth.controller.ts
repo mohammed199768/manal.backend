@@ -15,10 +15,13 @@ const authService = new AuthService();
  */
 const REFRESH_COOKIE_OPTIONS = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' as const : 'lax' as const,
-    path: '/api/v1/auth/refresh', // SECURITY: Cookie only sent to refresh endpoint
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    secure: process.env.NODE_ENV === 'production', // Must be true if sameSite='none'
+    // SECURITY CRITICAL: Vercel (frontend) and Railway (backend) are different origins.
+    // We MUST use 'none' to allow the cookie to be sent cross-site.
+    // 'strict' would BLOCK the cookie because the domains don't match.
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' as const : 'lax' as const,
+    path: '/api/v1/auth/refresh',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 export class AuthController {

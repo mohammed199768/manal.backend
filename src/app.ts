@@ -28,7 +28,24 @@ const app = express();
 app.set('trust proxy', 1); // Trust first proxy (useful for rate limiting behind load balancers/ngrok)
 app.use(helmet());
 app.use(cors({
-    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000', 'http://localhost:3001'],
+    origin: (requestOrigin, callback) => {
+        const allowedOrigins = process.env.CORS_ORIGIN?.split(',') || [
+            'http://localhost:3000', 
+            'http://localhost:3001',
+            'https://admin-lms-pi.vercel.app' // Explicitly added for production Vercel support
+        ];
+        
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!requestOrigin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(requestOrigin) !== -1) {
+            callback(null, true);
+        } else {
+            // Optional: Log blocked origins for debugging
+            // console.warn(`Blocked CORS origin: ${requestOrigin}`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 }));
 if (process.env.NODE_ENV !== 'test') {
