@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils/app-error';
 
 // =========================================================
-// CANONICAL ROLE DEFINITIONS (PHASE 2)
+// CANONICAL ROLE DEFINITIONS (PHASE 2 - FINAL)
 // =========================================================
-export const PANEL_ROLES = ['INSTRUCTOR', 'ADMIN'] as const;
+export const PANEL_ROLES = ['INSTRUCTOR'] as const;
 export const STUDENT_ROLES = ['STUDENT'] as const;
 
 export type PanelRole = typeof PANEL_ROLES[number];
@@ -28,7 +28,7 @@ export const requireRoles = (allowedRoles: string[]) => {
 
         // Strict Check: User's role MUST be in the allowed list.
         if (!allowedRoles.includes(userRole)) {
-            return next(new AppError('Forbidden: Insufficient permissions', 403));
+            return next(new AppError(`Forbidden: Insufficient permissions. Required: ${allowedRoles.join(', ')}`, 403));
         }
 
         next();
@@ -36,7 +36,7 @@ export const requireRoles = (allowedRoles: string[]) => {
 };
 
 /**
- * Enforces access for Control Panel Users (Instructors & Admins).
+ * Enforces access for Control Panel Users (Instructors ONLY).
  * Use this for all /api/v1/instructor/** and /api/v1/admin/** routes.
  */
 export const requirePanelRole = requireRoles([...PANEL_ROLES]);
