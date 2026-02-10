@@ -22,13 +22,19 @@ export const requireRoles = (allowedRoles: string[]) => {
 
         const userRole = req.user.role;
 
+        // Diagnostic Log
+        console.log(`[RBAC] Role: ${userRole}, Allowed: [${allowedRoles.join(', ')}]`);
+
         if (!userRole) {
+             console.error('[RBAC] DENIED 403: No role claim found on request');
              return next(new AppError('Forbidden: User has no role', 403));
         }
 
         // Strict Check: User's role MUST be in the allowed list.
         if (!allowedRoles.includes(userRole)) {
-            return next(new AppError(`Forbidden: Insufficient permissions. Required: ${allowedRoles.join(', ')}`, 403));
+            console.error(`[RBAC] DENIED 403: Role ${userRole} not in [${allowedRoles.join(', ')}]`);
+            // In Production, show generic message, but for this fix we keep it clear
+            return next(new AppError('Forbidden: Insufficient permissions', 403));
         }
 
         next();
