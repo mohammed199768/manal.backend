@@ -1,20 +1,17 @@
 import nodemailer from 'nodemailer';
-import axios from 'axios';
 import { logger } from '../../utils/logger';
 
 export class EmailService {
     private transporter: nodemailer.Transporter;
-    private readonly maxRetries = 0; // SMTP fails fast, then fallback
     private readonly brevoApiUrl = 'https://api.brevo.com/v3/smtp/email';
 
     constructor() {
         // Phase 1: SMTP Hardening
-        // Explicitly define secure connection based on port 465
-        const smtpPort = Number(process.env.SMTP_PORT) || 2525;
+        const smtpPort = Number(process.env.SMTP_PORT) || 587;
         const isSecure = smtpPort === 465;
 
         this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.mailtrap.io',
+            host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
             port: smtpPort,
             secure: isSecure, // true for 465, false for other ports
             auth: {
@@ -44,8 +41,8 @@ export class EmailService {
             await this.transporter.verify();
             logger.info('SMTP connection configuration verified successfully');
         } catch (error: any) {
-            // Log warning but don't crash - app can still try fallback
-            logger.warn('SMTP connection failed on startup - Email service will rely on fallback', {
+            // Log warning but don't crash - app relies on fallback
+            logger.warn('SMTP connection failed on startup - Email service will rely on HTTP fallback', {
                 code: error.code,
                 message: error.message
             });
@@ -69,49 +66,59 @@ export class EmailService {
         return { name: 'LMS Support', email: fromString.trim() };
     }
 
-    // Phase 2: HTTP API Fallback
+    // Phase 2: HTTP Fallback (Native Fetch)
     private async sendViaBrevoFallback(email: string, subject: string, htmlContent: string) {
         if (!process.env.BREVO_API_KEY) {
             logger.error('SMTP failed and BREVO_API_KEY is missing - Email delivery completely failed', { email });
             return { success: false, error: 'Email delivery failed (No Fallback Configured)' };
         }
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // Strict 10s timeout
+
         try {
             const sender = this.getSenderIdentity();
             
-            // Explicit 15s timeout for HTTP request
-            const response = await axios.post(
-                this.brevoApiUrl,
-                {
+            const response = await fetch(this.brevoApiUrl, {
+                method: 'POST',
+                headers: {
+                    'api-key': process.env.BREVO_API_KEY,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
                     sender,
                     to: [{ email }],
                     subject,
                     htmlContent 
-                },
-                {
-                    headers: {
-                        'api-key': process.env.BREVO_API_KEY,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    timeout: 10000 // 10s strict timeout
-                }
-            );
+                }),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(`HTTP ${response.status}: ${JSON.stringify(errorData)}`);
+            }
+
+            const data = await response.json() as { messageId?: string };
 
             logger.info('Email delivered via Brevo HTTP API (Fallback)', { 
                 email, 
-                messageId: response.data.messageId 
+                messageId: data.messageId 
             });
             
-            return { success: true, messageId: response.data.messageId };
+            return { success: true, messageId: data.messageId };
 
         } catch (error: any) {
+            clearTimeout(timeoutId);
+
             // Safe error logging
             const safeError = {
-                status: error.response?.status,
-                code: error.code,
+                name: error.name,
                 message: error.message,
-                data: error.response?.data
+                cause: error.cause
             };
             
             logger.error('Brevo HTTP Fallback also failed', { email, error: safeError });
@@ -120,7 +127,7 @@ export class EmailService {
     }
 
     async sendVerificationCode(email: string, code: string): Promise<{ success: boolean; messageId?: string; error?: string }> {
-        // Fix incorrect default URL logic (was 'http://localhost:')
+        // URL Fix: Correct localhost fallback without missing port
         const appUrl = process.env.STUDENT_APP_URL || 'http://localhost:3000';
         
         const mailOptions = {
