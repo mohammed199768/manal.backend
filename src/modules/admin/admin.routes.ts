@@ -20,6 +20,7 @@ router.get('/purchases/ledger', purchasesController.listLedger);
 router.put('/purchases/payments/:paymentId', purchasesController.updatePayment); // NEW: Ledger editing
 router.get('/purchases/history/export', purchasesController.exportHistory); // NEW: CSV Export
 router.get('/revenue/summary', purchasesController.getRevenueSummary);
+router.get('/revenue/timeseries', purchasesController.getRevenueTimeseries); // NEW: Time-series
 router.get('/dashboard/insights', insightsController.getInsights);
 
 // Admin Locks

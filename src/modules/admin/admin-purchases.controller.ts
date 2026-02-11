@@ -557,5 +557,61 @@ export class AdminPurchasesController {
             console.error('[AdminPurchases] Revenue Summary Error:', error);
             return ApiResponse.error(res, error, 'Internal Server Error');
         }
-    }
+    };
+
+    // GET /api/v1/admin/revenue/timeseries
+    public getRevenueTimeseries = async (req: Request, res: Response) => {
+        try {
+            const days = Number(req.query.days) || 14;
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(endDate.getDate() - days + 1); // +1 to include today in the count
+
+            // Use groupBy to aggregate by day (requires some post-processing or raw query)
+            // Prisma groupBy on DateTime is exact match. We need by date.
+            // Raw query is best for Date Trunc.
+            
+            const revenueByDay: any[] = await prisma.$queryRaw`
+                SELECT 
+                    DATE_TRUNC('day', "createdAt") as date,
+                    SUM("amount") as amount
+                FROM "payment_records"
+                WHERE 
+                    "status" = 'COMPLETED' 
+                    AND "provider" = 'MANUAL_WHATSAPP'
+                    AND "createdAt" >= ${startDate}
+                GROUP BY DATE_TRUNC('day', "createdAt")
+                ORDER BY date ASC
+            `;
+
+            // Process and Zero-Fill
+            const series: { date: string; amount: number }[] = [];
+            
+            // Map DB results to a lookup
+            const dbMap = new Map<string, number>();
+            revenueByDay.forEach((row: any) => {
+                // Ensure date is string YYYY-MM-DD
+                const d = new Date(row.date).toISOString().split('T')[0];
+                dbMap.set(d, Number(row.amount));
+            });
+
+            // Generate full range
+            for (let i = 0; i < days; i++) {
+                const d = new Date();
+                d.setDate(d.getDate() - (days - 1 - i));
+                const dateKey = d.toISOString().split('T')[0];
+                
+                series.push({
+                    date: dateKey,
+                    amount: dbMap.get(dateKey) || 0
+                });
+            }
+
+            return ApiResponse.success(res, { series });
+
+        } catch (error) {
+            console.error('[AdminPurchases] Revenue Timeseries Error:', error);
+            return ApiResponse.error(res, error, 'Internal Server Error');
+        }
+    };
 }
