@@ -185,6 +185,9 @@ model PaymentRecord {
   user       User       @relation(fields: [userId], references: [id], onDelete: Restrict)
   course     Course     @relation(fields: [courseId], references: [id], onDelete: Restrict)
 
+  @@index([enrollmentId, status])
+  @@index([status, provider])
+  @@index([createdAt])
   @@map("payment_records")
 }
 

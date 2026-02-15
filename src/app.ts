@@ -96,6 +96,10 @@ app.use('/api/v1/instructor/payments', instructorPaymentsRoutes);
 import bunnyWebhookRoutes from './modules/webhooks/bunny-webhook.routes';
 app.use('/api/v1/webhooks', bunnyWebhookRoutes);
 
+// System Health
+import healthRoutes from './modules/health/health.routes';
+app.use('/api/v1/health', healthRoutes);
+
 // Error Handling (Must be last)
 app.use(errorMiddleware);
 

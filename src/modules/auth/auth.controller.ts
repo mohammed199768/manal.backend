@@ -34,7 +34,11 @@ export class AuthController {
             }
 
             const input = registerSchema.parse(req.body);
-            const { accessToken, refreshToken } = await authService.register(input);
+            const { accessToken, refreshToken } = await authService.register(
+                input, 
+                req.ip || req.socket.remoteAddress, 
+                req.headers['user-agent']
+            );
 
             // SECURITY: Set refresh token with hardened cookie options
             res.cookie('refreshToken', refreshToken, REFRESH_COOKIE_OPTIONS);
@@ -48,7 +52,11 @@ export class AuthController {
     async login(req: Request, res: Response, next: NextFunction) {
         try {
             const input = loginSchema.parse(req.body);
-            const { accessToken, refreshToken, user } = await authService.login(input);
+            const { accessToken, refreshToken, user } = await authService.login(
+                input,
+                req.ip || req.socket.remoteAddress,
+                req.headers['user-agent']
+            );
 
             // SECURITY: Set refresh token with hardened cookie options
             res.cookie('refreshToken', refreshToken, REFRESH_COOKIE_OPTIONS);
@@ -73,13 +81,24 @@ export class AuthController {
                 return res.status(401).json({ success: false, message: 'Refresh token missing' });
             }
 
-            const { accessToken, refreshToken: newRefreshToken } = await authService.refreshTokens(refreshToken);
+            const { accessToken, refreshToken: newRefreshToken } = await authService.refreshTokens(
+                refreshToken,
+                req.ip || req.socket.remoteAddress,
+                req.headers['user-agent']
+            );
 
             // SECURITY: Rotate refresh token with hardened cookie options
             res.cookie('refreshToken', newRefreshToken, REFRESH_COOKIE_OPTIONS);
 
             return ApiResponse.success(res, { accessToken }, 'Token refreshed successfully');
         } catch (error) {
+            // If refresh fails (e.g. revoked), clear the cookie
+            res.clearCookie('refreshToken', { 
+                path: REFRESH_COOKIE_OPTIONS.path,
+                httpOnly: true,
+                secure: REFRESH_COOKIE_OPTIONS.secure,
+                sameSite: REFRESH_COOKIE_OPTIONS.sameSite
+            });
             next(error);
         }
     }

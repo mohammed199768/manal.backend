@@ -8,7 +8,7 @@ import { Role } from '@prisma/client';
 import { emailService } from '../../services/email/email.service';
 
 export class AuthService {
-    async register(input: RegisterInput) {
+    async register(input: RegisterInput, ipAddress?: string, userAgent?: string) {
         const existingUser = await prisma.user.findFirst({
             where: { email: input.email },
         });
@@ -41,11 +41,8 @@ export class AuthService {
             const emailResult = await this.sendVerificationCode(user.id, user.email);
             if (!emailResult.success) {
                  // Log is already handled inside sendVerificationCode
-                 // But we can add high-level context here if needed
             }
         } catch (error) {
-             // Should not happen as sendVerificationCode handles errors internally, 
-             // but catches unexpected crashes
              const { logger } = await import('../../utils/logger');
              logger.error('CRITICAL: Failed to send initial verification code during registration', { 
                  userId: user.id, 
@@ -53,7 +50,7 @@ export class AuthService {
              });
         }
 
-        return this.generateTokens(user.id, user.role);
+        return this.generateTokens(user.id, user.role, ipAddress, userAgent);
     }
 
     // RELIABILITY FIX: Fail-fast username generation (Fix #5)
@@ -145,7 +142,7 @@ export class AuthService {
         });
     }
 
-    async login(input: LoginInput) {
+    async login(input: LoginInput, ipAddress?: string, userAgent?: string) {
         const user = await prisma.user.findUnique({
             where: { email: input.email },
         });
@@ -159,7 +156,7 @@ export class AuthService {
             throw new AppError('Invalid email or password', 401);
         }
 
-        const tokens = await this.generateTokens(user.id, user.role);
+        const tokens = await this.generateTokens(user.id, user.role, ipAddress, userAgent);
         return {
             ...tokens,
             user: {
@@ -174,32 +171,60 @@ export class AuthService {
         };
     }
 
-    async refreshTokens(refreshToken: string) {
+    async refreshTokens(refreshToken: string, ipAddress?: string, userAgent?: string) {
         try {
             const payload = JwtUtils.verifyRefreshToken(refreshToken);
-            const user = await prisma.user.findUnique({
-                where: { id: payload.userId },
+            
+            // 1. Verify Token exists in DB and is not revoked
+            const storedToken = await prisma.refreshToken.findFirst({
+                where: { 
+                    token: refreshToken,
+                    userId: payload.userId,
+                    revokedAt: null,
+                    expiresAt: { gt: new Date() }
+                },
+                include: { user: true }
             });
 
-            if (!user || !user.refreshToken) {
+            if (!storedToken) {
+                // Reuse Detection Logic could go here (if a revoked token is used)
                 throw new AppError('Invalid refresh token', 401);
             }
 
-            const isTokenValid = await bcrypt.compare(refreshToken, user.refreshToken);
-            if (!isTokenValid) {
-                throw new AppError('Invalid refresh token', 401);
-            }
+            const user = storedToken.user;
 
-            return this.generateTokens(user.id, user.role);
+            // 2. Rotate Token (Revoke old, issue new)
+            // Revoke current
+            await prisma.refreshToken.update({
+                where: { id: storedToken.id },
+                data: { revokedAt: new Date() }
+            });
+
+            // Issue new
+            return this.generateTokens(user.id, user.role, ipAddress, userAgent);
+
         } catch (error) {
             throw new AppError('Invalid or expired refresh token', 401);
         }
     }
 
     async logout(userId: string) {
+        // Revoke ALL active refresh tokens for this user
+        // This is a secure default. 
+        // Ideally we'd only revoke the specific session if we had the token, 
+        // but the controller might only give us userId in some flows.
+        // If we want specific token revocation, we need the token passed here.
+        
+        // For now, adhere to previous contract behavior: Global Logout
+        await prisma.refreshToken.updateMany({
+            where: { userId, revokedAt: null },
+            data: { revokedAt: new Date() }
+        });
+        
+        // Also clear legacy field just in case
         await prisma.user.update({
             where: { id: userId },
-            data: { refreshToken: null },
+            data: { refreshToken: null }
         });
     }
 
@@ -252,37 +277,57 @@ export class AuthService {
         if (!isValid) throw new AppError('Invalid current password', 400);
 
         const hashedPassword = await bcrypt.hash(data.newPassword, 10);
-        await prisma.user.update({
-            where: { id: userId },
-            data: { password: hashedPassword }
-        });
+        
+        // Revoke all sessions on password change
+        await prisma.$transaction([
+            prisma.user.update({
+                where: { id: userId },
+                data: { password: hashedPassword, refreshToken: null } // Clear legacy
+            }),
+            prisma.refreshToken.updateMany({
+                where: { userId, revokedAt: null },
+                data: { revokedAt: new Date() }
+            })
+        ]);
     }
 
-    private async generateTokens(userId: string, role: string) {
+    private async generateTokens(userId: string, role: string, ipAddress?: string, userAgent?: string) {
         const payload: TokenPayload = { userId, role };
         const accessToken = JwtUtils.generateAccessToken(payload);
         const refreshToken = JwtUtils.generateRefreshToken(payload);
 
-        // Hash refresh token before saving to DB
+        // Store REFRESH TOKEN in DB
+        // Determine expiry (should match JWT expiry)
+        // Typically 7 days for refresh token
+        const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); 
+
+        await prisma.refreshToken.create({
+            data: {
+                userId,
+                token: refreshToken,
+                expiresAt,
+                ipAddress: ipAddress || null,
+                deviceInfo: userAgent || null
+            }
+        });
+        
+        // Also update legacy field for backward compatibility during migration if needed,
+        // but we are moving to new system. Let's keep it null or updated to avoid confusion?
+        // Let's update it to the HASH of the new token just in case some old code checks it.
         const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
         await prisma.user.update({
             where: { id: userId },
-            data: { refreshToken: hashedRefreshToken },
+            data: { refreshToken: hashedRefreshToken }
         });
 
         return { accessToken, refreshToken };
     }
-
 
     async requestPasswordReset(email: string) {
         const user = await prisma.user.findUnique({ where: { email } });
 
         // Anti-Enumeration: Return success even if user not found (but don't send email)
         if (!user) {
-            // Log for debug but don't expose error
-            // logger.info('Password reset requested for non-existent email', { email }); 
-            // Commented out to strictly follow "Closed Brain" logging rules if not explicitly allowed? 
-            // Actually, safe logging is allowed.
             return;
         }
 
@@ -335,10 +380,15 @@ export class AuthService {
                 where: { id: resetRecord.id },
                 data: { usedAt: new Date() },
             }),
-            // Invalidate all existing sessions (optional but good security practice - 
-            // adhering to "revoke token" logic might strictly mean clearing refresh token)
-            // Contract says: "Strictly resets the password hash." doesn't mandate logout.
-            // Leaving logout out to strictly follow spec "DOES NOT log the user in automatically".
+            // Revoke all sessions on password reset
+            prisma.refreshToken.updateMany({
+                where: { userId: resetRecord.userId, revokedAt: null },
+                data: { revokedAt: new Date() }
+            }),
+             prisma.user.update({
+                where: { id: resetRecord.userId },
+                data: { refreshToken: null }
+            }),
         ]);
     }
 }

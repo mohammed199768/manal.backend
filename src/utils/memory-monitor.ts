@@ -34,3 +34,13 @@ export function startMemoryMonitor() {
 
     logger.info('✅ Memory Monitor Started');
 }
+
+export const getMemoryUsage = () => {
+    const used = process.memoryUsage();
+    return {
+        rss: `${Math.round(used.rss / 1024 / 1024 * 100) / 100} MB`,
+        heapTotal: `${Math.round(used.heapTotal / 1024 / 1024 * 100) / 100} MB`,
+        heapUsed: `${Math.round(used.heapUsed / 1024 / 1024 * 100) / 100} MB`,
+        external: `${Math.round(used.external / 1024 / 1024 * 100) / 100} MB`,
+    };
+};
