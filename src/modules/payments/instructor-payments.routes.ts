@@ -7,7 +7,7 @@ import { Role } from '@prisma/client';
 const router = Router();
 const controller = new InstructorPaymentsController();
 
-router.get('/summary', authMiddleware, requireRole('ADMIN'), controller.getRevenueSummary);
-router.get('/', authMiddleware, requireRole('ADMIN'), controller.listPayments);
+router.get('/summary', authMiddleware, requireRole('INSTRUCTOR'), controller.getRevenueSummary);
+router.get('/', authMiddleware, requireRole('INSTRUCTOR'), controller.listPayments);
 
 export default router;
