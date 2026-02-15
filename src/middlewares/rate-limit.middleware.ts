@@ -14,6 +14,7 @@ const createLimiter = (prefix: string, windowMs: number, max: number, message: s
         standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
         legacyHeaders: false, // Disable the `X-RateLimit-*` headers
         store: new RedisStore({
+            // @ts-expect-error - Known type mismatch between ioredis and rate-limit-redis
             sendCommand: (...args: string[]) => redisClient.call(...args),
             prefix: `rate-limit:${prefix}:`
         }),
@@ -65,4 +66,12 @@ export const paymentRateLimiter = createLimiter(
     60 * 1000, // 1 minute
     10, // 10 payments/edits per minute
     'Payment processing limit exceeded.'
+);
+
+// 5. Public Access (Catalog, etc.)
+export const publicRateLimiter = createLimiter(
+    'public',
+    60 * 1000, // 1 minute
+    60, // 60 requests
+    'Too many requests, please slow down.'
 );
