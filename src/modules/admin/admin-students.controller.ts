@@ -24,7 +24,7 @@ export class AdminStudentsController {
             }
 
             if (student.role === Role.INSTRUCTOR) {
-                throw new AppError('Cannot delete admin/instructor accounts', 403);
+                throw new AppError('Cannot delete instructor accounts', 403);
             }
 
             // 2. Delete in correct order to satisfy FK constraints

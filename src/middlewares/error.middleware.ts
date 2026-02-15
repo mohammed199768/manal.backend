@@ -65,6 +65,7 @@ export const errorMiddleware = (
     if (statusCode >= 500) {
         logger.error(message, logContext, err);
     } else {
+        // INFO: Reduce noise for 400s (User Errors)
         logger.warn(message, { ...logContext, errorDetails });
     }
 
@@ -72,6 +73,8 @@ export const errorMiddleware = (
     if (isProd && statusCode >= 500) {
         message = 'Internal Server Error';
         errorDetails = null;
+        // SECURITY: Ensure no stack trace leaks
+        if (err.stack) delete err.stack;
     }
 
     ApiResponse.error(res, errorDetails, message, statusCode);

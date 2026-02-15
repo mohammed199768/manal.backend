@@ -63,6 +63,13 @@ export class AuthController {
         try {
             const refreshToken = req.cookies.refreshToken;
             if (!refreshToken) {
+                // SECURITY: Clear cookie to prevent infinite refresh loops on frontend
+                res.clearCookie('refreshToken', { 
+                    path: REFRESH_COOKIE_OPTIONS.path,
+                    httpOnly: true,
+                    secure: REFRESH_COOKIE_OPTIONS.secure,
+                    sameSite: REFRESH_COOKIE_OPTIONS.sameSite
+                });
                 return res.status(401).json({ success: false, message: 'Refresh token missing' });
             }
 

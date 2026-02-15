@@ -4,13 +4,13 @@
     "description": "LMS Marketplace MVP",
     "main": "dist/index.js",
     "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-"build": "npx prisma generate && npx prisma migrate deploy && npx tsc -p .",
-    "start": "node dist/index.js",
-    "worker": "node dist/workers/pdf.worker.js",
-    "prisma:deploy": "npx prisma migrate deploy",
-    "postinstall": "npx prisma generate"
-},
+        "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+        "build": "npx prisma generate && npx prisma migrate deploy && npx tsc -p .",
+        "start": "node dist/index.js",
+        "worker": "node dist/workers/pdf.worker.js",
+        "prisma:deploy": "npx prisma migrate deploy",
+        "postinstall": "npx prisma generate"
+    },
     "prisma": {
         "seed": "ts-node prisma/seed.ts"
     },
@@ -52,6 +52,7 @@
         "express": "^4.22.1",
         "express-rate-limit": "^8.2.1",
         "helmet": "^8.1.0",
+        "ioredis": "^5.9.3",
         "jsonwebtoken": "^9.0.3",
         "libreoffice-convert": "^1.8.1",
         "morgan": "^1.10.1",

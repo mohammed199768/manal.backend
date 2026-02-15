@@ -2,55 +2,31 @@ import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
+import Redis from 'ioredis';
 import prisma from '../../config/prisma';
 import { BunnyStorageProvider } from '../../services/storage/bunny-storage.provider';
 import { AppError } from '../../utils/app-error';
 import { UPLOAD_LIMITS } from '../../config/upload-limits.config';
 
 const storage = new BunnyStorageProvider();
+const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
 
-// In-memory store for active chunked uploads
-// In production with multiple instances, use Redis
 interface ChunkedUploadSession {
     uploadId: string;
     filename: string;
     fileSize: number;
     mimeType: string;
     totalChunks: number;
-    receivedChunks: Set<number>;
+    receivedChunks: number[]; // Serialized as Array for JSON
     partId: string;
     isSecure: boolean;
     tempDir: string;
-    createdAt: Date;
+    createdAt: string; // Serialized as string
     userId: string;
 }
 
-const uploadSessions = new Map<string, ChunkedUploadSession>();
-
-// Cleanup stale sessions older than 1 hour
-const UPLOAD_SESSION_TTL = 60 * 60 * 1000; // 1 hour
-
-setInterval(() => {
-    const now = Date.now();
-    for (const [uploadId, session] of uploadSessions) {
-        if (now - session.createdAt.getTime() > UPLOAD_SESSION_TTL) {
-            console.log(`[ChunkedUpload] Cleaning up stale session: ${uploadId}`);
-            cleanupSession(uploadId);
-        }
-    }
-}, 5 * 60 * 1000); // Check every 5 minutes
-
-async function cleanupSession(uploadId: string) {
-    const session = uploadSessions.get(uploadId);
-    if (session) {
-        try {
-            await fs.promises.rm(session.tempDir, { recursive: true, force: true });
-        } catch (e) {
-            console.error(`[ChunkedUpload] Failed to cleanup temp dir: ${session.tempDir}`);
-        }
-        uploadSessions.delete(uploadId);
-    }
-}
+// Session TTL: 1 hour
+const UPLOAD_SESSION_TTL = 60 * 60; 
 
 export interface InitUploadInput {
     filename: string;
@@ -75,6 +51,10 @@ export interface FinalizeUploadInput {
 }
 
 export class ChunkedUploadService {
+    private getRedisKey(uploadId: string): string {
+        return `upload:session:${uploadId}`;
+    }
+
     /**
      * Initialize a chunked upload session
      */
@@ -101,10 +81,11 @@ export class ChunkedUploadService {
         }
 
         const user = await prisma.user.findUnique({ where: { id: userId } });
-        const isAdmin = user?.role === 'ADMIN' as any;
+        // RBAC UPDATE: Admin is deprecated, Instructor is the authority
+        const isInstructor = user?.role === 'INSTRUCTOR';
         const isOwner = part.lecture.course.instructorId === userId;
 
-        if (!isAdmin && !isOwner) {
+        if (!isInstructor && !isOwner) {
             throw new AppError('Access denied', 403);
         }
 
@@ -113,22 +94,22 @@ export class ChunkedUploadService {
         const tempDir = path.join(os.tmpdir(), `lms-chunked-${uploadId}`);
         await fs.promises.mkdir(tempDir, { recursive: true });
 
-        // Store session
+        // Store session in Redis
         const session: ChunkedUploadSession = {
             uploadId,
             filename: input.filename,
             fileSize: input.fileSize,
             mimeType: input.mimeType,
             totalChunks: input.totalChunks,
-            receivedChunks: new Set(),
+            receivedChunks: [],
             partId: input.partId,
             isSecure: input.isSecure,
             tempDir,
-            createdAt: new Date(),
+            createdAt: new Date().toISOString(),
             userId
         };
 
-        uploadSessions.set(uploadId, session);
+        await redis.setex(this.getRedisKey(uploadId), UPLOAD_SESSION_TTL, JSON.stringify(session));
         console.log(`[ChunkedUpload] Initialized session ${uploadId} for ${input.filename} (${input.totalChunks} chunks)`);
 
         return { uploadId };
@@ -138,10 +119,14 @@ export class ChunkedUploadService {
      * Upload a single chunk
      */
     async uploadChunk(input: ChunkUploadInput): Promise<{ received: number; total: number }> {
-        const session = uploadSessions.get(input.uploadId);
-        if (!session) {
+        const key = this.getRedisKey(input.uploadId);
+        const data = await redis.get(key);
+        
+        if (!data) {
             throw new AppError('Upload session not found or expired', 404);
         }
+
+        const session: ChunkedUploadSession = JSON.parse(data);
 
         // Validate chunk index
         if (input.chunkIndex < 0 || input.chunkIndex >= session.totalChunks) {
@@ -150,6 +135,7 @@ export class ChunkedUploadService {
 
         // Validate chunk size (last chunk may be smaller)
         const isLastChunk = input.chunkIndex === session.totalChunks - 1;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const expectedChunkSize = isLastChunk 
             ? session.fileSize % UPLOAD_LIMITS.CHUNK || UPLOAD_LIMITS.CHUNK
             : UPLOAD_LIMITS.CHUNK;
@@ -162,13 +148,18 @@ export class ChunkedUploadService {
         const chunkPath = path.join(session.tempDir, `chunk-${input.chunkIndex.toString().padStart(5, '0')}`);
         await fs.promises.writeFile(chunkPath, input.chunk);
 
-        // Mark chunk as received
-        session.receivedChunks.add(input.chunkIndex);
+        // Update received chunks in Redis
+        // Using Set in memory logic for checks, but Array for storage
+        const receivedSet = new Set(session.receivedChunks);
+        receivedSet.add(input.chunkIndex);
+        session.receivedChunks = Array.from(receivedSet);
+
+        await redis.setex(key, UPLOAD_SESSION_TTL, JSON.stringify(session));
 
         console.log(`[ChunkedUpload] Received chunk ${input.chunkIndex + 1}/${session.totalChunks} for ${session.uploadId}`);
 
         return {
-            received: session.receivedChunks.size,
+            received: session.receivedChunks.length,
             total: session.totalChunks
         };
     }
@@ -177,10 +168,14 @@ export class ChunkedUploadService {
      * Finalize and assemble all chunks
      */
     async finalizeUpload(userId: string, input: FinalizeUploadInput): Promise<{ storageKey: string; assetId: string }> {
-        const session = uploadSessions.get(input.uploadId);
-        if (!session) {
+        const key = this.getRedisKey(input.uploadId);
+        const data = await redis.get(key);
+
+        if (!data) {
             throw new AppError('Upload session not found or expired', 404);
         }
+
+        const session: ChunkedUploadSession = JSON.parse(data);
 
         // Verify user
         if (session.userId !== userId) {
@@ -188,8 +183,8 @@ export class ChunkedUploadService {
         }
 
         // Verify all chunks received
-        if (session.receivedChunks.size !== session.totalChunks) {
-            throw new AppError(`Missing chunks. Received ${session.receivedChunks.size}/${session.totalChunks}`, 400);
+        if (session.receivedChunks.length !== session.totalChunks) {
+            throw new AppError(`Missing chunks. Received ${session.receivedChunks.length}/${session.totalChunks}`, 400);
         }
 
         console.log(`[ChunkedUpload] Assembling ${session.totalChunks} chunks for ${session.uploadId}`);
@@ -219,7 +214,8 @@ export class ChunkedUploadService {
         let storageKey: string;
 
         if (session.isSecure) {
-            // Create a pending PartFile record that will be processed by PDF worker
+            // Create a pending PartFile record
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const partFile = await prisma.partFile.create({
                 data: {
                     id: fileId,
@@ -240,6 +236,7 @@ export class ChunkedUploadService {
             await fs.promises.writeFile(workerInputPath, fileBuffer);
 
             // Queue for processing
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             const { pdfQueue } = require('../../queues/pdf.queue');
             await pdfQueue.add('watermark-pdf', {
                 filePath: workerInputPath,
@@ -287,7 +284,13 @@ export class ChunkedUploadService {
         }
 
         // Cleanup session
-        await cleanupSession(input.uploadId);
+        // Remove from Redis and delete temp dir
+        await redis.del(key);
+        try {
+            await fs.promises.rm(session.tempDir, { recursive: true, force: true });
+        } catch (e) {
+            console.error(`[ChunkedUpload] Failed to cleanup temp dir: ${session.tempDir}`);
+        }
 
         return {
             storageKey,
