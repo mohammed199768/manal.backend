@@ -11,7 +11,7 @@ const createLimiter = (prefix: string, windowMs: number, max: number, message: s
     return rateLimit({
         windowMs,
         max,
-        standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+        standardHeaders: 'draft-7', // Return rate limit info in the `RateLimit-*` headers
         legacyHeaders: false, // Disable the `X-RateLimit-*` headers
         store: new RedisStore({
             // @ts-expect-error - Known type mismatch between ioredis and rate-limit-redis
@@ -19,8 +19,12 @@ const createLimiter = (prefix: string, windowMs: number, max: number, message: s
             prefix: `rate-limit:${prefix}:`
         }),
         keyGenerator: (req) => {
-            // Use User ID if authenticated, otherwise IP
-            return (req.user?.userId) || req.ip || 'unknown';
+            // Use User ID if authenticated, otherwise IP (IPv6 safe)
+            if (req.user?.userId) {
+                return `user:${req.user.userId}`;
+            }
+            const ip = req.ip || 'unknown';
+            return `ip:${ip}`;
         },
         handler: (req, res) => {
             logger.warn(`Rate limit exceeded for [${prefix}]`, { 

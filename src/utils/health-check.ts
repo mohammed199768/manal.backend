@@ -21,7 +21,7 @@ export async function performStartupChecks(): Promise<boolean> {
         await redisClient.quit(); // Close connection after check
 
         // 3. Environment Variables Check
-        const requiredVars = ['DATABASE_URL', 'JWT_SECRET', 'JWT_REFRESH_SECRET'];
+        const requiredVars = ['DATABASE_URL', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET'];
         const missing = requiredVars.filter(v => !process.env[v]);
         
         if (missing.length > 0) {
