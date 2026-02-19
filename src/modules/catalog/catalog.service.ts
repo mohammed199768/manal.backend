@@ -234,6 +234,13 @@ export class CatalogService {
                     isFeatured: true,
                     isFree: true,
                     updatedAt: true,
+                    university: {
+                        select: {
+                            id: true,
+                            name: true,
+                            logo: true,
+                        },
+                    },
                 },
                 skip,
                 take: limit,
