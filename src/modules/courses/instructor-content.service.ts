@@ -10,7 +10,7 @@ import {
     CreateAssetInput,
     UpdateAssetInput
 } from './instructor-content.schema';
-import { PartFileType } from '@prisma/client';
+import { PartFileType, PaymentStatus } from '@prisma/client';
 
 // Phase 8: V2 Simplified - All Subject/Major references removed
 
@@ -568,20 +568,64 @@ export class InstructorContentService {
             where: { courseId },
             include: {
                 user: {
-                    include: {
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                        phoneNumber: true,
+                        avatar: true,
                         courseProgress: {
-                            where: { courseId }
+                            where: { courseId },
+                            select: {
+                                id: true,
+                                lastPartId: true,
+                                updatedAt: true
+                            }
                         }
                     }
+                },
+                course: {
+                    select: {
+                        price: true
+                    }
+                },
+                paymentRecords: {
+                    where: {
+                        status: PaymentStatus.COMPLETED
+                    },
+                    select: {
+                        amount: true
+                    }
                 }
+            },
+            orderBy: {
+                enrolledAt: 'desc'
             }
         });
 
         return enrollments.map(e => ({
             ...e.user,
             progress: e.user.courseProgress?.[0] || null,
+            enrollmentId: e.id,
             enrollmentStatus: e.status,
-            enrolledAt: e.enrolledAt
+            enrolledAt: e.enrolledAt,
+            payment: (() => {
+                const price = Number(e.course.price);
+                const paidAmount = e.paymentRecords.reduce(
+                    (sum: number, p: { amount: unknown }) => sum + Number(p.amount),
+                    0
+                );
+                const remaining = Math.max(0, price - paidAmount);
+                const paymentState =
+                    paidAmount >= price
+                        ? 'FULLY_PAID'
+                        : paidAmount > 0
+                            ? 'PARTIALLY_PAID'
+                            : 'UNPAID';
+
+                return { price, paidAmount, remaining, paymentState };
+            })()
         }));
     }
 }
