@@ -4,9 +4,6 @@ dotenv.config();
 import { validateBunnyEnv } from './config/env-validator';
 validateBunnyEnv();
 
-// PHASE 10 FIX: Initialize Worker Mechanism
-import './workers/pdf.worker';
-
 import { logger } from './utils/logger';
 import app from './app';
 

@@ -1,10 +1,8 @@
 import { Worker, Job } from 'bullmq';
 import { PDFDocument, rgb, degrees } from 'pdf-lib';
-import fs from 'fs';
 import path from 'path';
 import { PrismaClient } from '@prisma/client';
 import { BunnyStorageProvider as StorageService } from '../services/storage/bunny-storage.provider';
-import { AppError } from '../utils/app-error';
 import libre from 'libreoffice-convert';
 import util from 'util';
 import IORedis from 'ioredis';
@@ -15,9 +13,43 @@ const prisma = new PrismaClient();
 const storageService = new StorageService();
 
 interface PdfJobData {
-  filePath: string;
+  sourceKey: string;
+  sourceMime: string;
+  originalName: string;
   partFileId: string;
   adminName: string;
+}
+
+function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    stream.on('data', (chunk: Buffer | string) => {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    });
+    stream.on('end', () => resolve(Buffer.concat(chunks)));
+    stream.on('error', reject);
+  });
+}
+
+function inferExtension(sourceMime: string, originalName: string): string {
+  switch (sourceMime) {
+    case 'application/pdf': return '.pdf';
+    case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': return '.pptx';
+    case 'application/vnd.ms-powerpoint': return '.ppt';
+    case 'application/msword': return '.doc';
+    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': return '.docx';
+    case 'text/plain': return '.txt';
+  }
+
+  const fromName = path.extname(originalName || '').toLowerCase();
+  if (fromName) return fromName;
+
+  return '.bin';
+}
+
+function logWorkerError(category: string, jobId: string, partFileId: string, sourceKey: string, error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(`[PDF Worker][${category}] jobId=${jobId} partFileId=${partFileId} sourceKey=${sourceKey} error=${message}`);
 }
 
 // Support Railway REDIS_URL with TLS (rediss://)
@@ -35,11 +67,9 @@ const connection = process.env.REDIS_URL
 export const pdfWorker = new Worker<PdfJobData>(
   'pdf-processing',
   async (job: Job<PdfJobData>) => {
-    const { filePath, partFileId, adminName } = job.data;
-    console.log(`[PDF Worker] Processing job ${job.id} for PartFile ${partFileId}`);
-
-    // RELIABILITY FIX: Track all temp files for guaranteed cleanup (Fix #4)
-    const tempFiles: string[] = [filePath]; // Track input file
+    const { sourceKey, sourceMime, originalName, partFileId, adminName } = job.data;
+    const jobId = String(job.id ?? 'unknown');
+    console.log(`[PDF Worker] Processing job ${jobId} for PartFile ${partFileId} sourceKey=${sourceKey}`);
     
     // Smoke Test: Check LibreOffice Availability
     try {
@@ -62,31 +92,45 @@ export const pdfWorker = new Worker<PdfJobData>(
         data: { renderStatus: 'PROCESSING' },
       });
 
-      // 2. Normalize to PDF (Universal Doc Support)
+      // 2. Download source file from shared storage
+      console.log(`[PDF Worker] Step 2: Downloading source from storage. sourceKey=${sourceKey}`);
+      let sourceBytes: Buffer;
+      try {
+        const sourceStream = await storageService.downloadStream(sourceKey);
+        sourceBytes = await streamToBuffer(sourceStream);
+      } catch (error) {
+        logWorkerError('SOURCE_NOT_FOUND', jobId, partFileId, sourceKey, error);
+        throw error;
+      }
+
+      // 3. Normalize to PDF (Universal Doc Support)
       let pdfBytes: Buffer;
-      const ext = path.extname(filePath).toLowerCase();
+      const ext = inferExtension(sourceMime, originalName);
       
-      console.log(`[PDF Worker] Step 2: Normalization. Extension: ${ext}`);
+      console.log(`[PDF Worker] Step 3: Normalization. Extension: ${ext}`);
 
       if (ext !== '.pdf') {
           console.log(`[PDF Worker] Converting ${ext} to PDF using libreoffice...`);
-          const inputBuffer = await fs.promises.readFile(filePath);
-          // Convert to PDF format ('pdf' identifier)
-          pdfBytes = await convertAsync(inputBuffer, 'pdf', undefined);
+          try {
+            pdfBytes = await convertAsync(sourceBytes, 'pdf', undefined);
+          } catch (error) {
+            logWorkerError('CONVERT_FAILED', jobId, partFileId, sourceKey, error);
+            throw error;
+          }
           console.log(`[PDF Worker] Conversion successful. New Buffer Size: ${pdfBytes.length}`);
       } else {
-          console.log(`[PDF Worker] File is already PDF. Reading direct.`);
-          pdfBytes = await fs.promises.readFile(filePath);
+          console.log(`[PDF Worker] File is already PDF. Using source bytes directly.`);
+          pdfBytes = sourceBytes;
       }
 
-      // 3. Load PDF for Watermarking
-      console.log(`[PDF Worker] Step 3: Loading PDF Document for Watermarking...`);
+      // 4. Load PDF for Watermarking
+      console.log(`[PDF Worker] Step 4: Loading PDF Document for Watermarking...`);
       const pdfDoc = await PDFDocument.load(pdfBytes);
 
-      // 4. Watermark Pages
+      // 5. Watermark Pages
       const pages = pdfDoc.getPages();
       const watermarkText = adminName || 'Dr. Manal';
-      console.log(`[PDF Worker] Step 4: Applying Watermark '${watermarkText}' to ${pages.length} pages...`);
+      console.log(`[PDF Worker] Step 5: Applying Watermark '${watermarkText}' to ${pages.length} pages...`);
 
       pages.forEach((page) => {
         const { width, height } = page.getSize();
@@ -100,70 +144,69 @@ export const pdfWorker = new Worker<PdfJobData>(
         });
       });
 
-      // 5. Save Processed PDF (Watermarked)
-      console.log(`[PDF Worker] Step 5: Saving Watermarked PDF to temp...`);
-      const watermarkedPdfBytes = await pdfDoc.save();
-      
-      const tempProcessedPath = filePath + '.processed.pdf';
-      tempFiles.push(tempProcessedPath); // Track processed file
-      
-      await fs.promises.writeFile(tempProcessedPath, watermarkedPdfBytes);
-      console.log(`[PDF Worker] Temp file written to: ${tempProcessedPath}`);
-      
-      const processedPdfBytes = await fs.promises.readFile(tempProcessedPath);
+      // 6. Save processed PDF
+      console.log('[PDF Worker] Step 6: Serializing watermarked PDF...');
+      const processedPdfBytes = await pdfDoc.save();
       
       // Mock Multer File for the provider
       const filePayload: any = {
         buffer: processedPdfBytes,
         mimetype: 'application/pdf',
-        originalname: `${partFileId}.pdf`
+        originalname: `${path.parse(originalName || `${partFileId}`).name}.pdf`
       };
 
-      // 6. Upload to Bunny (Secure/Private Zone)
+      // 7. Upload to Bunny (Secure/Private Zone)
       const destinationPath = `/secured/${partFileId}.pdf`; 
-      console.log(`[PDF Worker] Step 6: Uploading to Bunny Storage at ${destinationPath}...`);
-      await storageService.uploadPrivate(filePayload, destinationPath);
+      console.log(`[PDF Worker] Step 7: Uploading to Bunny Storage at ${destinationPath}...`);
+      try {
+        await storageService.uploadPrivate(filePayload, destinationPath);
+      } catch (error) {
+        logWorkerError('UPLOAD_FAILED', jobId, partFileId, sourceKey, error);
+        throw error;
+      }
       console.log(`[PDF Worker] Upload successful.`);
 
-      // 7. Update DB Status
-      console.log(`[PDF Worker] Step 7: Updating DB Record to COMPLETED...`);
-      await prisma.partFile.update({
-        where: { id: partFileId },
-        data: { 
-          renderStatus: 'COMPLETED',
-          storageKey: destinationPath,
-          title: path.basename(filePath, ext) + '.pdf', // Optional: Update title logic or keep original? Keeping original but updating key.
-          pageCount: pages.length // FIX: Phase 10-FINAL - Ensure page count is saved
-        },
-      });
+      // 8. Update DB Status
+      console.log(`[PDF Worker] Step 8: Updating DB Record to COMPLETED...`);
+      try {
+        await prisma.partFile.update({
+          where: { id: partFileId },
+          data: { 
+            renderStatus: 'COMPLETED',
+            storageKey: destinationPath,
+            title: path.parse(originalName || `${partFileId}`).name + '.pdf',
+            pageCount: pages.length // FIX: Phase 10-FINAL - Ensure page count is saved
+          },
+        });
+      } catch (error) {
+        logWorkerError('DB_UPDATE_FAILED', jobId, partFileId, sourceKey, error);
+        throw error;
+      }
 
-      console.log(`[PDF Worker] Job ${job.id} completed successfully.`);
+      // 9. Cleanup staged source file (best effort)
+      try {
+        await storageService.delete(sourceKey);
+        console.log(`[PDF Worker] Step 9: Deleted staged source file. sourceKey=${sourceKey}`);
+      } catch (error) {
+        console.warn(`[PDF Worker] Step 9: Failed to delete staged source file. sourceKey=${sourceKey}`);
+      }
+
+      console.log(`[PDF Worker] Job ${jobId} completed successfully. partFileId=${partFileId} sourceKey=${sourceKey}`);
 
     } catch (error: any) {
-      console.error(`[PDF Worker] CRITICAL ERROR Job ${job.id}:`, error);
+      console.error(`[PDF Worker] CRITICAL ERROR jobId=${jobId} partFileId=${partFileId} sourceKey=${sourceKey}:`, error);
       
       try {
           await prisma.partFile.update({
             where: { id: partFileId },
             data: { renderStatus: 'FAILED' },
           });
-          console.log(`[PDF Worker] Marked Job ${job.id} as FAILED in DB.`);
+          console.log(`[PDF Worker] Marked job ${jobId} as FAILED in DB.`);
       } catch (dbError) {
-          console.error(`[PDF Worker] FAILED TO UPDATE DB STATUS:`, dbError);
+          logWorkerError('DB_UPDATE_FAILED', jobId, partFileId, sourceKey, dbError);
       }
 
       throw error;
-    } finally {
-      // RELIABILITY FIX: Guaranteed cleanup (Fix #4)
-      console.log(`[PDF Worker] Step 8: Cleanup temp files... (${tempFiles.length} files)`);
-      for (const file of tempFiles) {
-        try {
-          await fs.promises.unlink(file);
-          console.log(`[PDF Worker] Cleaned up: ${file}`);
-        } catch (e: any) {
-          console.warn(`[PDF Worker] Cleanup failed for ${file}: ${e.message}`);
-        }
-      }
     }
   },
   { connection }
@@ -172,9 +215,13 @@ export const pdfWorker = new Worker<PdfJobData>(
 console.log('[PDF Worker] Worker Service Initialized and Listening...');
 
 pdfWorker.on('completed', (job) => {
-  console.log(`[PDF Worker] Job ${job.id} has completed!`);
+  const partFileId = job.data?.partFileId || 'unknown';
+  const sourceKey = job.data?.sourceKey || 'unknown';
+  console.log(`[PDF Worker] Job ${job.id} has completed! partFileId=${partFileId} sourceKey=${sourceKey}`);
 });
 
 pdfWorker.on('failed', (job, err) => {
-  console.error(`[PDF Worker] Job ${job?.id} has failed with ${err.message}`);
+  const partFileId = job?.data?.partFileId || 'unknown';
+  const sourceKey = job?.data?.sourceKey || 'unknown';
+  console.error(`[PDF Worker] Job ${job?.id} has failed with ${err.message}. partFileId=${partFileId} sourceKey=${sourceKey}`);
 });

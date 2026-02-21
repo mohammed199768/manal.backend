@@ -230,22 +230,36 @@ export class ChunkedUploadService {
                 }
             });
 
-            // Write to temp for worker to process
+            // Upload source file to shared staging storage for worker processing
             const ext = this.getExtension(session.mimeType);
-            const workerInputPath = path.join(os.tmpdir(), `lms-upload-${fileId}-input${ext}`);
-            await fs.promises.writeFile(workerInputPath, fileBuffer);
+            const sourceKey = `/staging/pdf-input/${fileId}/source${ext}`;
+            const sourceFile: Express.Multer.File = {
+                buffer: fileBuffer,
+                mimetype: session.mimeType,
+                originalname: session.filename,
+                fieldname: 'file',
+                encoding: '7bit',
+                size: fileBuffer.length,
+                destination: '',
+                filename: '',
+                path: '',
+                stream: null as any
+            };
+            await storage.uploadPrivate(sourceFile, sourceKey);
 
             // Queue for processing
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             const { pdfQueue } = require('../../queues/pdf.queue');
-            await pdfQueue.add('watermark-pdf', {
-                filePath: workerInputPath,
+            const job = await pdfQueue.add('watermark-pdf', {
+                sourceKey,
+                sourceMime: session.mimeType,
+                originalName: session.filename,
                 partFileId: fileId,
                 adminName: 'Dr. Manal'
             });
+            console.log(`[ChunkedUpload] Queued secure file ${fileId} for processing. jobId=${job.id} sourceKey=${sourceKey}`);
 
             storageKey = ''; // Will be set by worker
-            console.log(`[ChunkedUpload] Queued secure file ${fileId} for processing`);
 
         } else {
             // Direct upload for downloadable files

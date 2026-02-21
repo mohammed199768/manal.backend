@@ -3,9 +3,7 @@ import { BunnyStorageProvider } from '../../services/storage/bunny-storage.provi
 import { BunnyStreamService } from '../../services/video/bunny-stream.service';
 import { AppError } from '../../utils/app-error';
 import { v4 as uuidv4 } from 'uuid';
-import { PartFileType } from '@prisma/client';
 import path from 'path';
-import fs from 'fs';
 
 
 const storage = new BunnyStorageProvider();
@@ -142,19 +140,18 @@ export class UploadService {
             // 1. SECURE PATH (Watermarking + Encrypted View)
             if (isSecure) {
                 console.log(`[UploadService] Secure Upload for ${file.originalname}. Queueing job...`);
-                
-                // Write to temp file for Worker to process (RAILWAY: Use os.tmpdir())
+
                 const ext = this.getExtension(file.mimetype);
-                const tempPath = path.join(require('os').tmpdir(), `lms-upload-${fileId}-input${ext}`);
-                await fs.promises.mkdir(path.dirname(tempPath), { recursive: true });
-                await fs.promises.writeFile(tempPath, file.buffer);
+                const sourceKey = `/staging/pdf-input/${fileId}/source${ext}`;
+                await storage.uploadPrivate(file, sourceKey);
+                console.log(`[UploadService] Staged secure source file. partFileId=${fileId} sourceKey=${sourceKey}`);
 
                 // Phase 10-IMPROVEMENT: Custom Display Name
                 const originalNameBase = path.parse(file.originalname).name;
                 const displayName = `${originalNameBase}.pdf`;
 
                 // Create DB Record (PENDING)
-                const partFile = await prisma.partFile.create({
+                await prisma.partFile.create({
                     data: {
                         id: fileId,
                         partId: lessonId,
@@ -170,11 +167,14 @@ export class UploadService {
 
                 // Add to Queue
                 const { pdfQueue } = require('../../queues/pdf.queue'); // Deferred require to avoid circular deps if any
-                await pdfQueue.add('watermark-pdf', {
-                    filePath: tempPath,
+                const job = await pdfQueue.add('watermark-pdf', {
+                    sourceKey,
+                    sourceMime: file.mimetype,
+                    originalName: file.originalname,
                     partFileId: fileId,
                     adminName: 'Dr. Manal' // Hardcoded Contract #9
                 });
+                console.log(`[UploadService] Queued secure PDF job. partFileId=${fileId} jobId=${job.id} sourceKey=${sourceKey}`);
 
                 return { status: 'QUEUED', id: fileId };
             } 

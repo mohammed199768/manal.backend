@@ -83,7 +83,23 @@ export class BunnyStorageProvider implements StorageProvider {
     }
 
     async delete(key: string): Promise<void> {
-        // Implementation if needed
+        if (!this.apiKey || !this.storageZone) {
+            throw new AppError('Storage not configured', 500);
+        }
+
+        const cleanPath = key.startsWith('/') ? key : `/${key}`;
+        const normalizedKey = `${this.storageZone}${cleanPath}`;
+        const url = `${this.baseUrl}/${normalizedKey}`;
+
+        try {
+            await axios.delete(url, {
+                headers: { AccessKey: this.apiKey },
+            });
+            console.log(`[Bunny] Delete success for: ${cleanPath}`);
+        } catch (error: any) {
+            // Bunny returns non-2xx for missing keys; caller can decide how to handle.
+            throw new AppError(`File delete failed: ${error.response?.data?.Message || error.message}`, 502);
+        }
     }
 
     async getDownloadUrl(key: string): Promise<string> {
