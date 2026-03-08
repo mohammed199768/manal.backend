@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import { RedisStore } from 'rate-limit-redis';
 import Redis from 'ioredis';
 import { logger } from '../utils/logger';
@@ -23,8 +23,8 @@ const createLimiter = (prefix: string, windowMs: number, max: number, message: s
             if (req.user?.userId) {
                 return `user:${req.user.userId}`;
             }
-            const ip = req.ip || 'unknown';
-            return `ip:${ip}`;
+            const ip = req.ip || req.socket.remoteAddress || '127.0.0.1';
+            return `ip:${ipKeyGenerator(ip)}`;
         },
         handler: (req, res) => {
             logger.warn(`Rate limit exceeded for [${prefix}]`, { 
