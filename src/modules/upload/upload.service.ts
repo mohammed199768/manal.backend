@@ -381,9 +381,18 @@ export class UploadService {
             // Phase 10-IMPROVEMENT: Use displayName if available
             const downloadName = partFile.displayName || `${partFile.title}.pdf`;
             
+            // Infer correct content type from storageKey
+            let contentType = 'application/pdf';
+            const ext = key.split('.').pop()?.toLowerCase();
+            if (ext) {
+                if (ext === 'jpg' || ext === 'jpeg') contentType = 'image/jpeg';
+                else if (ext === 'png') contentType = 'image/png';
+                else if (ext === 'webp') contentType = 'image/webp';
+            }
+
             return {
                 stream,
-                contentType: 'application/pdf',
+                contentType,
                 filename: downloadName
             };
         } catch (e) {
