@@ -307,7 +307,7 @@ export class InstructorContentService {
                     orderBy: { order: 'asc' }
                 },
                 _count: {
-                    select: { enrollments: true }
+                    select: { enrollments: { where: { status: 'ACTIVE' } } }
                 }
             }
         });
@@ -434,6 +434,7 @@ export class InstructorContentService {
                 where,
                 include: {
                     enrollments: {
+                        where: { status: 'ACTIVE' },
                         include: {
                             course: true
                         }
@@ -472,7 +473,8 @@ export class InstructorContentService {
         const enrollments = await prisma.enrollment.findMany({
             where: {
                 userId: studentId,
-                course: { instructorId }
+                course: { instructorId },
+                status: 'ACTIVE'
             },
             include: {
                 course: {
@@ -573,7 +575,7 @@ export class InstructorContentService {
     async getStudentsByCourse(instructorId: string, courseId: string) {
         await this.checkCourseOwnership(instructorId, courseId);
         const enrollments = await prisma.enrollment.findMany({
-            where: { courseId },
+            where: { courseId, status: 'ACTIVE' },
             include: {
                 user: {
                     select: {

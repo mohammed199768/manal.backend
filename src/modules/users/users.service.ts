@@ -73,6 +73,7 @@ export class UsersService {
             where: { id: studentId },
             include: {
                 enrollments: {
+                    where: { status: 'ACTIVE' },
                     include: {
                         locks: true,
                         course: {
