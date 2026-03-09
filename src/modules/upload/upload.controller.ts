@@ -129,13 +129,26 @@ export class UploadController {
     async securePdf(req: Request, res: Response, next: NextFunction) {
         try {
             const { assetId } = req.params;
-            const { stream, contentType, filename } = await service.getSecurePdf(req.user!.userId, assetId);
+            const document = await service.getSecurePdf(req.user!.userId, assetId) as { 
+                isPublicUrl: boolean; 
+                publicUrl?: string; 
+                stream: NodeJS.ReadableStream | null; 
+                contentType: string; 
+                filename: string; 
+            };
 
-            res.setHeader('Content-Type', contentType);
-            res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+            // Phase 10-D: Redirect public files instead of streaming them
+            if (document.isPublicUrl && document.publicUrl) {
+                return res.redirect(document.publicUrl);
+            }
+
+            if (!document.stream) throw new AppError('Stream unavailable', 500);
+
+            res.setHeader('Content-Type', document.contentType);
+            res.setHeader('Content-Disposition', `inline; filename="${document.filename}"`);
             res.setHeader('X-Content-Type-Options', 'nosniff');
 
-            pipeline(stream, res, (err) => {
+            pipeline(document.stream, res, (err) => {
                 if (err && !res.headersSent) next(err);
             });
         } catch (error) {

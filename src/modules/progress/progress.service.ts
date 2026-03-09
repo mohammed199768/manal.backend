@@ -24,13 +24,14 @@ export class ProgressService {
 
         const courseId = part.lecture.courseId;
 
-        // 2. Validate ACTIVE Enrollment status
         const enrollment = await prisma.enrollment.findUnique({
             where: { userId_courseId: { userId, courseId } },
         });
 
         if (!enrollment || enrollment.status !== EnrollmentStatus.ACTIVE) {
-            throw new AppError('Active enrollment required to track progress', 403);
+            // Unenrolled users (e.g., watching trailers) shouldn't track progress.
+            // Return silently to prevent frontend 403 console errors.
+            return { status: 'skipped', reason: 'Active enrollment required to track progress' };
         }
 
         // 3. Identify current progress

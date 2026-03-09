@@ -198,8 +198,12 @@ export class StudentContentService {
             }
         }
 
+        const isTrailer = await prisma.courseTrailerSection.findFirst({
+            where: { lectureId: assetEntity.part.lecture.id }
+        });
+
         const hasAccess =
-            isPreview ||
+            isPreview || !!isTrailer ||
             isEnrolled;
 
         if (!hasAccess) {
@@ -208,10 +212,15 @@ export class StudentContentService {
         }
 
         // Normalize info for token generation
+        const isBunnyId = bunnyVideoId && !bunnyVideoId.includes('/');
+        const isImage = bunnyVideoId && (bunnyVideoId.endsWith('.jpg') || bunnyVideoId.endsWith('.png') || bunnyVideoId.endsWith('.jpeg') || bunnyVideoId.endsWith('.webp'));
+        
         const assetInfo = {
             id: assetEntity.id,
             type: type,
-            bunnyVideoId: bunnyVideoId
+            bunnyVideoId: isBunnyId ? bunnyVideoId : undefined,
+            isImage: isImage,
+            originalUrl: isImage ? `${process.env.BUNNY_STORAGE_PULL_ZONE}${bunnyVideoId}` : undefined
         };
 
         return this.generatePlaybackInfo(user, assetInfo);
@@ -309,6 +318,8 @@ export class StudentContentService {
             embedUrl,
             token: tokenData?.token,
             expires: tokenData?.expires,
+            isImage: asset.isImage,
+            originalUrl: asset.originalUrl,
             watermark: {
                 userId: user.id,
                 emailMasked: this.maskEmail(user.email),

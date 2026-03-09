@@ -268,7 +268,11 @@ export class UploadService {
         const user = await prisma.user.findUnique({ where: { id: userId } });
         const isAdmin = user?.role === 'ADMIN' as any;
         
-        const hasAccess = isInstructor || isAdmin || course.isFree || (enrollment && enrollment.status === 'ACTIVE');
+        const isTrailer = await prisma.courseTrailerSection.findFirst({
+            where: { lectureId: partFile.part.lecture.id }
+        });
+        
+        const hasAccess = isInstructor || isAdmin || course.isFree || (enrollment && enrollment.status === 'ACTIVE') || !!isTrailer;
         
         if (!hasAccess) throw new AppError('Access denied', 403);
         
@@ -312,7 +316,11 @@ export class UploadService {
         const user = await prisma.user.findUnique({ where: { id: userId } });
         const isAdmin = user?.role === 'ADMIN' as any;
         
-        const hasAccess = isInstructor || isAdmin || course.isFree || (enrollment && enrollment.status === 'ACTIVE');
+        const isTrailer = await prisma.courseTrailerSection.findFirst({
+            where: { lectureId: partFile.part.lecture.id }
+        });
+        
+        const hasAccess = isInstructor || isAdmin || course.isFree || (enrollment && enrollment.status === 'ACTIVE') || !!isTrailer;
         
         if (!hasAccess) throw new AppError('Access denied', 403);
 
@@ -360,7 +368,11 @@ export class UploadService {
         const user = await prisma.user.findUnique({ where: { id: userId } });
         const isAdmin = user?.role === 'ADMIN' as any;
         
-        const hasAccess = isInstructor || isAdmin || course.isFree || (enrollment && enrollment.status === 'ACTIVE');
+        const isTrailer = await prisma.courseTrailerSection.findFirst({
+            where: { lectureId: partFile.part.lecture.id }
+        });
+        
+        const hasAccess = isInstructor || isAdmin || course.isFree || (enrollment && enrollment.status === 'ACTIVE') || !!isTrailer;
         if (!hasAccess) throw new AppError('Access denied', 403);
         
         // SECURITY FIX: Apply centralized lock check (Fix #1)
@@ -375,7 +387,21 @@ export class UploadService {
              throw new AppError('Document is processing', 423); 
         }
 
-        // 4. Return Stream
+        // 4. Handle Public Files (Images etc) to prevent Axios stream crash
+        if (!partFile.isSecure) {
+            // Note: DB storageKey for public files is typically `/public/...`
+            const publicUrl = await storage.getDownloadUrl(key);
+            console.log(`[UploadService] Redirecting to public URL: ${publicUrl}`);
+            return {
+                isPublicUrl: true,
+                publicUrl: publicUrl,
+                stream: null as any,
+                contentType: 'application/octet-stream',
+                filename: 'public-file'
+            };
+        }
+
+        // 5. Build Secure Stream
         try {
             const stream = await storage.downloadStream(key);
             // Phase 10-IMPROVEMENT: Use displayName if available
@@ -391,12 +417,14 @@ export class UploadService {
             }
 
             return {
+                isPublicUrl: false,
                 stream,
                 contentType,
                 filename: downloadName
             };
         } catch (e) {
-             throw new AppError('File not found in storage', 404);
+             console.error(`[UploadService] Error streaming secure file from Bunny:`, e);
+             throw new AppError('File not found in storage or BunnyCDN error', 404);
         }
     }
 
