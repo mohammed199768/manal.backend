@@ -23,6 +23,7 @@ router.get('/courses/:courseId/students', controller.getCourseStudents);
 router.post('/courses/:courseId/sections', controller.createSection);
 router.patch('/sections/:id', controller.updateSection);
 router.delete('/sections/:id', controller.deleteSection);
+router.post('/sections/:id/asset-container', controller.ensureLectureAssetContainer);
 
 // Lessons
 router.post('/sections/:sectionId/lessons', controller.createLesson);

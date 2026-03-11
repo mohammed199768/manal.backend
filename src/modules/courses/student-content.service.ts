@@ -4,6 +4,12 @@ import { EnrollmentStatus } from '@prisma/client';
 import { signBunnyStreamUrl } from '../../utils/bunny-stream-token';
 
 export class StudentContentService {
+    private static readonly LECTURE_ASSET_PART_PREFIX = '__lecture_assets__:';
+
+    private isLectureAssetPartTitle(title: string) {
+        return title.startsWith(StudentContentService.LECTURE_ASSET_PART_PREFIX);
+    }
+
     async getCourseContent(userId: string, courseId: string) {
         // Fetch course with BOTH old and new structures
         const course = await prisma.course.findUnique({
@@ -66,55 +72,72 @@ export class StudentContentService {
         if (course.lectures && course.lectures.length > 0) {
             // PATH A: New Structure (Lecture -> Part -> PartLesson/PartFile)
             // Map to Old Structure Shape (Backward Compatibility)
-            sectionsDTO = course.lectures.map(lecture => ({
-                id: lecture.id,
-                title: lecture.title,
-                lessons: lecture.parts.map(part => {
-                    const isPartLocked = lockedPartIds.has(part.id) && !isInstructor && !isAdmin;
+            sectionsDTO = course.lectures.map((lecture) => {
+                const lectureAssetPart = lecture.parts.find((part) => this.isLectureAssetPartTitle(part.title));
+                const normalParts = lecture.parts.filter((part) => !this.isLectureAssetPartTitle(part.title));
 
-                    // Combine PartLessons (Video) and PartFiles (PDF) into a single Asset array
-                    // Normalize into "AssetDTO"
+                const mapAssets = (part: typeof lecture.parts[number], isLockedForStudent: boolean) => {
                     const videoAssets = part.lessons.map(pl => ({
-                        id: pl.id, 
-                        title: pl.title, 
-                        type: 'VIDEO', 
-                        isPreview: false, // Default for now, as not in PartLesson schema yet? Check.
+                        id: pl.id,
+                        title: pl.title,
+                        type: 'VIDEO',
+                        isPreview: false,
                         order: pl.order
                     }));
 
-
                     const fileAssets = part.files.map(pf => ({
                         id: pf.id,
-                        title: pf.displayName || pf.title, // Phase 10-IMPROVEMENT: Custom Display Name
-                        type: 'PDF',
-                        isPreview: false, // Default
+                        title: pf.displayName || pf.title,
+                        type: pf.type === 'PPTX' ? 'PPTX' : 'PDF',
+                        isPreview: false,
                         order: pf.order
                     }));
 
-                    // Sort combined assets by order (Interleaved)
-                    const assets = [...videoAssets, ...fileAssets].sort((a, b) => a.order - b.order);
+                    return [...videoAssets, ...fileAssets]
+                        .sort((a, b) => a.order - b.order)
+                        .map(asset => ({
+                            ...asset,
+                            isLocked: (!isEnrolled && !asset.isPreview) || isLockedForStudent,
+                        }));
+                };
 
-                    const lessonsAssets = assets.map(asset => ({
-                        ...asset,
-                        // LOCKED if not enrolled OR if explicitly locked for this student
-                        isLocked: (!isEnrolled && !asset.isPreview) || isPartLocked,
-                    }));
-
-                    // Metadata Leak Prevention
+                const lectureAssets = lectureAssetPart ? (() => {
+                    const isLectureAssetsLocked = lockedPartIds.has(lectureAssetPart.id) && !isInstructor && !isAdmin;
+                    const assets = mapAssets(lectureAssetPart, isLectureAssetsLocked);
                     const filteredAssets = (isEnrolled || course.isFree)
-                        ? lessonsAssets
-                        : lessonsAssets.filter(a => a.isPreview);
+                        ? assets
+                        : assets.filter(a => a.isPreview);
 
-                    return {
-                        id: part.id,
-                        title: part.title,
-                        // UX: If part is locked, show it as locked content
-                        hasLockedContent: (!isEnrolled && assets.some(a => !a.isPreview)) || isPartLocked,
-                        isLockedForStudent: isPartLocked, // Explicit Flag for UI
-                        assets: filteredAssets,
-                    };
-                })
-            }));
+                    return filteredAssets.map((asset) => ({
+                        ...asset,
+                        lessonId: lectureAssetPart.id
+                    }));
+                })() : [];
+
+                return {
+                    id: lecture.id,
+                    title: lecture.title,
+                    assets: lectureAssets,
+                    lessons: normalParts.map(part => {
+                        const isPartLocked = lockedPartIds.has(part.id) && !isInstructor && !isAdmin;
+                        const lessonsAssets = mapAssets(part, isPartLocked);
+
+                        // Metadata Leak Prevention
+                        const filteredAssets = (isEnrolled || course.isFree)
+                            ? lessonsAssets
+                            : lessonsAssets.filter(a => a.isPreview);
+
+                        return {
+                            id: part.id,
+                            title: part.title,
+                            // UX: If part is locked, show it as locked content
+                            hasLockedContent: (!isEnrolled && lessonsAssets.some(a => !a.isPreview)) || isPartLocked,
+                            isLockedForStudent: isPartLocked,
+                            assets: filteredAssets,
+                        };
+                    })
+                };
+            });
 
         } else {
             // PATH B: Legacy Fallback REMOVED (Phase 7A)

@@ -93,6 +93,15 @@ export class InstructorContentController {
         }
     }
 
+    async ensureLectureAssetContainer(req: Request, res: Response, next: NextFunction) {
+        try {
+            const result = await service.ensureLectureAssetContainer(req.user!.userId, req.params.id);
+            return ApiResponse.success(res, result, 'Lecture asset container ready');
+        } catch (error) {
+            next(error);
+        }
+    }
+
     // Lesson
     async createLesson(req: Request, res: Response, next: NextFunction) {
         try {

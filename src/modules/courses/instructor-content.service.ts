@@ -15,6 +15,40 @@ import { PartFileType, PaymentStatus } from '@prisma/client';
 // Phase 8: V2 Simplified - All Subject/Major references removed
 
 export class InstructorContentService {
+    private static readonly LECTURE_ASSET_PART_PREFIX = '__lecture_assets__:';
+
+    private getLectureAssetPartTitle(lectureId: string) {
+        return `${InstructorContentService.LECTURE_ASSET_PART_PREFIX}${lectureId}`;
+    }
+
+    private isLectureAssetPartTitle(title: string) {
+        return title.startsWith(InstructorContentService.LECTURE_ASSET_PART_PREFIX);
+    }
+
+    private mapPartAssets(part: {
+        lessons: Array<{ id: string; title: string; video: string; order: number }>;
+        files: Array<{ id: string; title: string; storageKey: string; order: number; type?: string; displayName?: string }>;
+    }) {
+        return [
+            ...part.lessons.map((pl) => ({
+                id: pl.id,
+                title: pl.title,
+                type: 'VIDEO',
+                bunnyVideoId: pl.video,
+                order: pl.order,
+                isPreview: false
+            })),
+            ...part.files.map((pf) => ({
+                id: pf.id,
+                title: pf.displayName || pf.title,
+                type: pf.type === 'PPTX' ? 'PPTX' : 'PDF',
+                storageKey: pf.storageKey,
+                order: pf.order,
+                isPreview: false
+            }))
+        ].sort((a, b) => a.order - b.order);
+    }
+
     // Courses
     async createCourse(instructorId: string, data: CreateCourseInput) {
         const slug = data.slug || data.title.toLowerCase()
@@ -72,6 +106,53 @@ export class InstructorContentService {
             order: lecture.order,
             courseId: lecture.courseId,
             lessons: []
+        };
+    }
+
+    async ensureLectureAssetContainer(instructorId: string, sectionId: string) {
+        const lecture = await prisma.lecture.findUnique({
+            where: { id: sectionId },
+            include: {
+                course: true,
+                parts: {
+                    orderBy: { order: 'desc' },
+                    include: {
+                        lessons: { orderBy: { order: 'asc' } },
+                        files: { orderBy: { order: 'asc' } }
+                    }
+                }
+            }
+        });
+
+        if (!lecture) throw new AppError('Section not found', 404);
+        if (lecture.course.instructorId !== instructorId) throw new AppError('Access denied', 403);
+
+        const existingPart = lecture.parts.find((part) => this.isLectureAssetPartTitle(part.title));
+        if (existingPart) {
+            return {
+                id: existingPart.id,
+                title: 'Lecture Assets',
+                order: existingPart.order,
+                assets: this.mapPartAssets(existingPart),
+                isLectureAssetContainer: true
+            };
+        }
+
+        const nextOrder = (lecture.parts[0]?.order || 0) + 1;
+        const createdPart = await prisma.part.create({
+            data: {
+                lectureId: lecture.id,
+                title: this.getLectureAssetPartTitle(lecture.id),
+                order: nextOrder
+            }
+        });
+
+        return {
+            id: createdPart.id,
+            title: 'Lecture Assets',
+            order: createdPart.order,
+            assets: [],
+            isLectureAssetContainer: true
         };
     }
 
@@ -141,6 +222,18 @@ export class InstructorContentService {
 
         if (part) {
             if (part.lecture.course.instructorId !== instructorId) throw new AppError('Access denied', 403);
+            const isLectureAssetContainer = this.isLectureAssetPartTitle(part.title);
+
+            if (isLectureAssetContainer) {
+                if (data.lectureId && data.lectureId !== part.lectureId) {
+                    throw new AppError('Lecture asset containers cannot be moved', 400);
+                }
+
+                if (data.title && data.title !== part.title) {
+                    throw new AppError('Lecture asset containers cannot be renamed', 400);
+                }
+            }
+
             let targetLectureId = part.lectureId;
             let nextOrder = data.order ?? part.order;
             let shouldResetParent = false;
@@ -463,36 +556,31 @@ export class InstructorContentService {
         }
 
         // Map to UI shape
-        const mappedSections = course.lectures.map(lecture => ({
-            id: lecture.id,
-            title: lecture.title,
-            order: lecture.order,
-            lessons: lecture.parts.map(part => ({
-                id: part.id,
-                title: part.title,
-                order: part.order,
-                assets: [
-                    ...part.lessons.map((pl: { id: string; title: string; video: string; order: number }) => ({
-                        id: pl.id,
-                        title: pl.title,
-                        type: 'VIDEO',
-                        bunnyVideoId: pl.video,
-                        order: pl.order,
-                        isPreview: false
-                    })),
-                    ...part.files.map((pf: { id: string; title: string; storageKey: string; order: number }) => ({
-                        id: pf.id,
-                        title: pf.title,
-                        type: 'PDF',
-                        storageKey: pf.storageKey,
-                        order: pf.order,
-                        isPreview: false
+        const mappedSections = course.lectures.map((lecture) => {
+            const lectureAssetContainer = lecture.parts.find((part: any) => this.isLectureAssetPartTitle(part.title));
+            const visibleParts = lecture.parts.filter((part: any) => !this.isLectureAssetPartTitle(part.title));
+
+            return {
+                id: lecture.id,
+                title: lecture.title,
+                order: lecture.order,
+                assets: lectureAssetContainer ? this.mapPartAssets(lectureAssetContainer as any) : [],
+                assetContainerPartId: lectureAssetContainer?.id,
+                lessons: visibleParts.map((part) => ({
+                    id: part.id,
+                    title: part.title,
+                    order: part.order,
+                    assets: this.mapPartAssets(part as any),
+                    // @ts-ignore
+                    subParts: (part.subParts || []).map((sp: any) => ({
+                        id: sp.id,
+                        title: sp.title,
+                        order: sp.order,
+                        assets: this.mapPartAssets(sp)
                     }))
-                ].sort((a, b) => a.order - b.order),
-                // @ts-ignore
-                subParts: (part.subParts || []).map((sp: any) => ({ id: sp.id, title: sp.title, order: sp.order, assets: [...sp.lessons.map((pl: any) => ({ id: pl.id, title: pl.title, type: 'VIDEO', bunnyVideoId: pl.video, order: pl.order })), ...sp.files.map((pf: any) => ({ id: pf.id, title: pf.title, type: 'PDF', storageKey: pf.storageKey, order: pf.order }))].sort((a, b) => a.order - b.order) }))
-            }))
-        }));
+                }))
+            };
+        });
 
         return {
             ...course,
@@ -521,35 +609,26 @@ export class InstructorContentService {
                 throw new AppError('Access denied', 403);
             }
 
+            const isLectureAssetContainer = this.isLectureAssetPartTitle(part.title);
+
             return {
                 id: part.id,
-                title: part.title,
+                title: isLectureAssetContainer ? 'Lecture Assets' : part.title,
                 order: part.order,
                 sectionId: part.lectureId,
+                isLectureAssetContainer,
                 section: {
                     ...part.lecture,
                     course: part.lecture.course
                 },
-                assets: [
-                    ...part.lessons.map((pl: { id: string; title: string; video: string; order: number }) => ({
-                        id: pl.id,
-                        title: pl.title,
-                        type: 'VIDEO',
-                        bunnyVideoId: pl.video,
-                        order: pl.order,
-                        isPreview: false
-                    })),
-                    ...part.files.map((pf: { id: string; title: string; storageKey: string; order: number }) => ({
-                        id: pf.id,
-                        title: pf.title,
-                        type: 'PDF',
-                        storageKey: pf.storageKey,
-                        order: pf.order,
-                        isPreview: false
-                    }))
-                ].sort((a, b) => a.order - b.order),
+                assets: this.mapPartAssets(part as any),
                 // @ts-ignore
-                subParts: (part.subParts || []).map((sp: any) => ({ id: sp.id, title: sp.title, order: sp.order, assets: [...sp.lessons.map((pl: any) => ({ id: pl.id, title: pl.title, type: 'VIDEO', bunnyVideoId: pl.video, order: pl.order })), ...sp.files.map((pf: any) => ({ id: pf.id, title: pf.title, type: 'PDF', storageKey: pf.storageKey, order: pf.order }))].sort((a, b) => a.order - b.order) }))
+                subParts: isLectureAssetContainer ? [] : (part.subParts || []).map((sp: any) => ({
+                    id: sp.id,
+                    title: sp.title,
+                    order: sp.order,
+                    assets: this.mapPartAssets(sp)
+                }))
             };
         }
 
